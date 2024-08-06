@@ -141,7 +141,8 @@ def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(
             _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
         env=env,
         cwd=ROOT,
     )
@@ -175,7 +176,8 @@ def test_transcribe_script_accepts_http_xiaoyuzhou_hosts(
             _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
         env=env,
         cwd=ROOT,
     )
@@ -250,7 +252,8 @@ fi
             _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
         env=env,
         cwd=ROOT,
     )
@@ -304,7 +307,8 @@ fi
             _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
         env=env,
         cwd=ROOT,
     )
