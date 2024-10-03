@@ -58,7 +58,7 @@ metadata:
 
 ```bash
 # Exa 网页搜索
-mcporter call 'exa.web_search_exa(query: "query", numResults: 5)'
+mcporter call exa.web_search_exa query="query" numResults=5
 
 # 通用网页阅读
 curl -s "https://r.jina.ai/URL"

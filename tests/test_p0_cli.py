@@ -659,6 +659,38 @@ def test_xhs_docker_cookie_copy_always_removes_temporary_file(monkeypatch, capsy
     assert "Failed to copy cookies: copy failed" in capsys.readouterr().out
 
 
+def test_xhs_docker_restart_failure_returns_failure(monkeypatch, capsys):
+    """Cookies are not active until the container successfully restarts."""
+
+    def fake_which(name):
+        return "/usr/bin/docker" if name == "docker" else None
+
+    def fake_run(args, **_kwargs):
+        if args[1] == "ps":
+            return _docker_result(args, stdout="xiaohongshu-mcp\n")
+        if args[1:3] == ["exec", "xiaohongshu-mcp"]:
+            return _docker_result(args, stdout="/app/data/cookies.json\n")
+        if args[1] == "restart":
+            return _docker_result(
+                args,
+                returncode=1,
+                stderr="no such container",
+            )
+        return _docker_result(args)
+
+    monkeypatch.setattr("shutil.which", fake_which)
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    result = cli._configure_xhs_cookies("web_session=xhs_secret")
+
+    output = capsys.readouterr().out
+    assert result is False
+    assert "Could not restart container" in output
+    assert "no such container" in output
+    assert "Restart manually" in output
+    assert "done" not in output
+
+
 def test_system_install_uses_ytdlp_first_user_config(
     monkeypatch, tmp_path
 ):
@@ -667,7 +699,6 @@ def test_system_install_uses_ytdlp_first_user_config(
 
     import agent_reach.utils.paths as paths
 
-    monkeypatch.setattr(paths.sys, "platform", "darwin")
     monkeypatch.setattr(paths.Path, "home", classmethod(lambda cls: tmp_path))
     monkeypatch.delenv("XDG_CONFIG_HOME")
     monkeypatch.setattr(

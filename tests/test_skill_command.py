@@ -3,6 +3,7 @@
 
 import importlib.resources
 import os
+import re
 import tempfile
 import unittest
 from argparse import Namespace
@@ -37,6 +38,22 @@ class TestSkillCommand(unittest.TestCase):
         self.assertNotIn("exa.get_code_context_exa", search_reference)
         self.assertNotIn("get_code_context_exa(", search_reference)
 
+    def test_mcporter_examples_use_shell_safe_named_arguments(self):
+        """Packaged commands must survive PowerShell and POSIX parsing."""
+        root = Path(__file__).resolve().parents[1]
+        markdown_files = [
+            *(root / "agent_reach" / "skill").rglob("*.md"),
+            *(root / "agent_reach" / "guides").rglob("*.md"),
+            root / "docs" / "install.md",
+            root / "docs" / "troubleshooting.md",
+        ]
+        function_call = re.compile(r"mcporter call\s+['\"][^'\"\r\n]+\(")
+
+        for markdown_file in markdown_files:
+            with self.subTest(markdown_file=markdown_file):
+                content = markdown_file.read_text(encoding="utf-8")
+                self.assertNotRegex(content, function_call)
+
     def test_linkedin_reference_uses_current_tool_contract(self):
         """LinkedIn examples should use the current server and parameters."""
         career_reference = (
@@ -46,24 +63,24 @@ class TestSkillCommand(unittest.TestCase):
         )
 
         self.assertIn(
-            "linkedin.get_person_profile("
-            'linkedin_username: "username", '
-            'sections: "experience,education")',
+            "linkedin.get_person_profile "
+            'linkedin_username="username" '
+            'sections="experience,education"',
             career_reference,
         )
         self.assertIn(
-            'linkedin.search_people(keywords: "AI engineer", '
-            'location: "Shanghai")',
+            'linkedin.search_people keywords="AI engineer" '
+            'location="Shanghai"',
             career_reference,
         )
         self.assertIn(
-            'linkedin.get_company_profile(company_name: "openai", '
-            'sections: "posts,jobs")',
+            'linkedin.get_company_profile company_name="openai" '
+            'sections="posts,jobs"',
             career_reference,
         )
         self.assertIn(
-            'linkedin.search_jobs(keywords: "software engineer", '
-            'location: "Remote", max_pages: 2)',
+            'linkedin.search_jobs keywords="software engineer" '
+            'location="Remote" max_pages=2',
             career_reference,
         )
         self.assertNotIn("linkedin-scraper.", career_reference)

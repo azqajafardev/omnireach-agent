@@ -7,8 +7,8 @@ Exa AI 搜索引擎。
 高质量 AI 搜索引擎，适合查找技术文档、官方示例和相关网页。
 
 ```bash
-mcporter call 'exa.web_search_exa(query: "query", numResults: 5)'
-mcporter call 'exa.web_search_exa(query: "library API code example", numResults: 5)'
+mcporter call exa.web_search_exa query="query" numResults=5
+mcporter call exa.web_search_exa query="library API code example" numResults=5
 ```
 
 ### 使用场景

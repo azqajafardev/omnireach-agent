@@ -7,7 +7,7 @@ import ssl
 import subprocess
 import urllib.request
 from typing import Any
-from urllib.parse import urlsplit
+from urllib.parse import quote, urlencode, urlsplit
 
 from agent_reach.utils.process import utf8_subprocess_env
 from agent_reach.utils.text import scrub_url_credentials
@@ -17,6 +17,12 @@ from .base import Channel
 _UA = "agent-reach/1.0"
 _TIMEOUT = 10
 _MAX_RESPONSE_BYTES = 1024 * 1024
+_API_BASE = "https://www.v2ex.com"
+
+
+def _v2ex_url(path: str, **params: Any) -> str:
+    """Build a V2EX URL without letting caller values alter its query."""
+    return f"{_API_BASE}{path}?{urlencode(params)}"
 
 
 def _validate_api_url(url: str) -> None:
@@ -203,9 +209,10 @@ class V2EXChannel(Channel):
         Returns a list of dicts with keys:
           title, url, replies, node_name, node_title, content
         """
-        url = (
-            f"https://www.v2ex.com/api/topics/show.json"
-            f"?node_name={node_name}&page=1"
+        url = _v2ex_url(
+            "/api/topics/show.json",
+            node_name=node_name,
+            page=1,
         )
         data = _get_json(url)
         results = []
@@ -237,7 +244,7 @@ class V2EXChannel(Channel):
           author, created, replies (list of dicts with: author, content, created)
         """
         topic_data = _get_json(
-            f"https://www.v2ex.com/api/topics/show.json?id={topic_id}"
+            _v2ex_url("/api/topics/show.json", id=topic_id)
         )
         # API returns a list even for single-ID queries
         if isinstance(topic_data, list):
@@ -251,8 +258,11 @@ class V2EXChannel(Channel):
         # Fetch replies (first page)
         try:
             replies_raw = _get_json(
-                f"https://www.v2ex.com/api/replies/show.json"
-                f"?topic_id={topic_id}&page=1"
+                _v2ex_url(
+                    "/api/replies/show.json",
+                    topic_id=topic_id,
+                    page=1,
+                )
             )
         except Exception:
             replies_raw = []
@@ -269,7 +279,10 @@ class V2EXChannel(Channel):
         return {
             "id": topic.get("id", topic_id),
             "title": topic.get("title", ""),
-            "url": topic.get("url", f"https://www.v2ex.com/t/{topic_id}"),
+            "url": topic.get(
+                "url",
+                f"{_API_BASE}/t/{quote(str(topic_id), safe='')}",
+            ),
             "content": topic.get("content", ""),
             "replies_count": topic.get("replies", 0),
             "node_name": node.get("name", ""),
@@ -290,12 +303,15 @@ class V2EXChannel(Channel):
           location, bio, avatar, created
         """
         data = _get_json(
-            f"https://www.v2ex.com/api/members/show.json?username={username}"
+            _v2ex_url("/api/members/show.json", username=username)
         )
         return {
             "id": data.get("id", 0),
             "username": data.get("username", username),
-            "url": data.get("url", f"https://www.v2ex.com/member/{username}"),
+            "url": data.get(
+                "url",
+                f"{_API_BASE}/member/{quote(str(username), safe='')}",
+            ),
             "website": data.get("website", ""),
             "twitter": data.get("twitter", ""),
             "psn": data.get("psn", ""),
@@ -320,11 +336,12 @@ class V2EXChannel(Channel):
             list of dicts with keys: title, url, snippet
             如果搜索不可用，返回包含单条 {"error": str} 的列表。
         """
+        search_url = _v2ex_url("/", q=query)
         return [
             {
                 "error": (
                     "V2EX 公开 API 不提供搜索端点。"
-                    f"建议改用：https://www.v2ex.com/?q={query} "
+                    f"建议改用：{search_url} "
                     "或通过 Exa channel 使用 site:v2ex.com 搜索。"
                 )
             }
