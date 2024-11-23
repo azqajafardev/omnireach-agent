@@ -90,7 +90,11 @@ def test_full_uninstall_includes_opencode_directory(
 
     with patch(
         "agent_reach.cli.os.path.expanduser",
-        side_effect=lambda value: value.replace("~", os.fspath(tmp_path)),
+        side_effect=lambda value: os.fspath(
+            tmp_path / value.removeprefix("~/")
+        )
+        if value.startswith("~/")
+        else value,
     ), patch("agent_reach.utils.paths.home_dir", return_value=tmp_path), patch(
         "shutil.which", return_value=None
     ):

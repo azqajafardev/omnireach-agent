@@ -699,7 +699,6 @@ def test_system_install_uses_ytdlp_first_user_config(
 
     import agent_reach.utils.paths as paths
 
-    monkeypatch.setattr(paths.sys, "platform", "darwin")
     monkeypatch.setattr(paths.Path, "home", classmethod(lambda cls: tmp_path))
     monkeypatch.delenv("XDG_CONFIG_HOME")
     monkeypatch.setattr(

@@ -46,6 +46,7 @@ jobs:
           python -m pip install -c constraints.txt -e ".[dev]"
 
       - name: Run tests
+        shell: bash
         run: |
           pytest -q
 

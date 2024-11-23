@@ -6,7 +6,7 @@ SCRIPT = ROOT / "test.sh"
 
 
 def test_integration_script_has_valid_shell_syntax():
-    subprocess.run(["bash", "-n", str(SCRIPT)], check=True)
+    subprocess.run(["bash", "-n", SCRIPT.name], check=True, cwd=ROOT)
 
 
 def test_integration_script_exercises_the_current_cli_contract():

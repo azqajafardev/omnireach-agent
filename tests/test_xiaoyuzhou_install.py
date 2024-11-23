@@ -59,12 +59,17 @@ def test_install_xiaoyuzhou_deps_replaces_stale_managed_script(
     assert installed.read_text(encoding="utf-8") == TRANSCRIBE_SCRIPT.read_text(
         encoding="utf-8"
     )
-    assert installed.stat().st_mode & stat.S_IXUSR
+    if os.name != "nt":
+        assert installed.stat().st_mode & stat.S_IXUSR
     assert "script updated" in capsys.readouterr().out
 
 
 def test_transcribe_script_is_cross_platform_shell_syntax():
-    subprocess.run(["bash", "-n", str(TRANSCRIBE_SCRIPT)], check=True)
+    subprocess.run(
+        ["bash", "-n", TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix()],
+        check=True,
+        cwd=ROOT,
+    )
 
 
 def test_transcribe_script_handles_git_bash_python_and_size_math():
