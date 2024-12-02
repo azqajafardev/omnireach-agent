@@ -168,6 +168,112 @@ class TestFallback:
 
 
 class TestOrchestrator:
+    def test_provider_fallback_consent_requires_auto(self, fake_config, chunk_file):
+        with pytest.raises(tr.TranscribeError, match="requires provider='auto'"):
+            tr.transcribe(
+                str(chunk_file),
+                provider="groq",
+                config=fake_config,
+                allow_provider_fallback=True,
+            )
+
+    def test_auto_does_not_send_audio_to_second_provider_without_consent(
+        self,
+        monkeypatch,
+        fake_config,
+        tmp_path,
+        chunk_file,
+        bounded_audio_duration,
+    ):
+        fake_config.set("groq_api_key", "gsk_test")
+        fake_config.set("openai_api_key", "sk-test")
+        compressed = tmp_path / "compressed.m4a"
+        compressed.write_bytes(b"compressed")
+        monkeypatch.setattr(tr, "compress_audio", lambda *_args: compressed)
+        calls: List[str] = []
+
+        def fake_post(url, **_kwargs):
+            calls.append(url)
+            if url == tr.PROVIDERS["groq"]["endpoint"]:
+                return FakeResponse(429, "rate limited")
+            return FakeResponse(200, "from-openai")
+
+        monkeypatch.setattr(tr.requests, "post", fake_post)
+
+        with pytest.raises(tr.TranscribeError, match="groq.*HTTP 429"):
+            tr.transcribe(
+                str(chunk_file),
+                out_dir=tmp_path / "work",
+                config=fake_config,
+            )
+
+        assert calls == [tr.PROVIDERS["groq"]["endpoint"]]
+
+    def test_auto_falls_back_only_with_explicit_consent(
+        self,
+        monkeypatch,
+        fake_config,
+        tmp_path,
+        chunk_file,
+        bounded_audio_duration,
+    ):
+        fake_config.set("groq_api_key", "gsk_test")
+        fake_config.set("openai_api_key", "sk-test")
+        compressed = tmp_path / "compressed.m4a"
+        compressed.write_bytes(b"compressed")
+        monkeypatch.setattr(tr, "compress_audio", lambda *_args: compressed)
+        calls: List[str] = []
+
+        def fake_post(url, **_kwargs):
+            calls.append(url)
+            if url == tr.PROVIDERS["groq"]["endpoint"]:
+                return FakeResponse(429, "rate limited")
+            return FakeResponse(200, "from-openai")
+
+        monkeypatch.setattr(tr.requests, "post", fake_post)
+
+        text = tr.transcribe(
+            str(chunk_file),
+            out_dir=tmp_path / "work",
+            config=fake_config,
+            allow_provider_fallback=True,
+        )
+
+        assert text == "from-openai"
+        assert calls == [
+            tr.PROVIDERS["groq"]["endpoint"],
+            tr.PROVIDERS["openai"]["endpoint"],
+        ]
+
+    def test_auto_uses_openai_when_it_is_the_only_configured_provider(
+        self,
+        monkeypatch,
+        fake_config,
+        tmp_path,
+        chunk_file,
+        bounded_audio_duration,
+    ):
+        fake_config.set("openai_api_key", "sk-test")
+        compressed = tmp_path / "compressed.m4a"
+        compressed.write_bytes(b"compressed")
+        monkeypatch.setattr(tr, "compress_audio", lambda *_args: compressed)
+        calls: List[str] = []
+
+        def fake_post(url, **_kwargs):
+            calls.append(url)
+            return FakeResponse(200, "from-openai")
+
+        monkeypatch.setattr(tr.requests, "post", fake_post)
+
+        text = tr.transcribe(
+            str(chunk_file),
+            out_dir=tmp_path / "work",
+            config=fake_config,
+        )
+
+        assert text == "from-openai"
+        assert calls == [tr.PROVIDERS["openai"]["endpoint"]]
+
     def test_rejects_overlong_audio_before_compression(
         self, monkeypatch, fake_config, chunk_file
     ):
@@ -599,6 +705,15 @@ class TestDownloadAudioSafety:
             ("http://192.168.1/a.mp3", "192.168.0.1"),
             ("http://2852039166/a.mp3", "169.254.169.254"),
             ("http://0xA9FEA9FE/a.mp3", "169.254.169.254"),
+            ("http://１２７.０.０.１/a.mp3", "127.0.0.1"),
+            ("http://２１３０７０６４３３/a.mp3", "127.0.0.1"),
+            ("http://０x７f０００００１/a.mp3", "127.0.0.1"),
+            ("http://ⓛⓞⓒⓐⓛⓗⓞⓢⓣ/a.mp3", "localhost"),
+            ("http://ℓocalhost/a.mp3", "localhost"),
+            ("http://%31%32%37.0.0.1/a.mp3", "127.0.0.1"),
+            ("http://127%2e0%2e0%2e1/a.mp3", "127.0.0.1"),
+            ("http://local%68ost/a.mp3", "localhost"),
+            ("http://127.0.0.1\\@example.com/a.mp3", "127.0.0.1"),
         ],
     )
     def test_rejects_shorthand_ipv4_spellings_of_internal_hosts(
@@ -632,7 +747,7 @@ class TestDownloadAudioSafety:
         monkeypatch.setattr(tr, "_run", should_not_run)
 
         with pytest.raises(tr.TranscribeError, match="private|internal|SSRF"):
-            tr.download_audio("http://2130706433/a.mp3", tmp_path)
+            tr.download_audio("http://２１３０７０６４３３/a.mp3", tmp_path)
 
     @pytest.mark.parametrize(
         "url",
@@ -722,20 +837,32 @@ class TestYouTubeChannelTranscribe:
 
         captured = {}
 
-        def fake_transcribe(source, *, provider="auto", out_dir=None, config=None):
+        def fake_transcribe(
+            source,
+            *,
+            provider="auto",
+            out_dir=None,
+            config=None,
+            allow_provider_fallback=False,
+        ):
             captured["source"] = source
             captured["provider"] = provider
             captured["config"] = config
+            captured["allow_provider_fallback"] = allow_provider_fallback
             return "delegated text"
 
         monkeypatch.setattr(tr, "transcribe", fake_transcribe)
         out = YouTubeChannel().transcribe(
-            "https://youtu.be/abc", provider="groq", config=fake_config
+            "https://youtu.be/abc",
+            provider="groq",
+            config=fake_config,
+            allow_provider_fallback=True,
         )
         assert out == "delegated text"
         assert captured["source"] == "https://youtu.be/abc"
         assert captured["provider"] == "groq"
         assert captured["config"] is fake_config
+        assert captured["allow_provider_fallback"] is True
 
 
 # --- Config feature requirement --------------------------------------- #

@@ -100,7 +100,8 @@ Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/m
 
 ```bash
 pip install https://github.com/Panniantong/agent-reach/archive/main.zip
-agent-reach install --env=auto
+agent-reach install --env=auto           # 読み取り専用チェック（デフォルト）
+agent-reach install --env=auto --system  # システム変更を明示的に許可した場合のみ
 ```
 </details>
 
@@ -113,7 +114,7 @@ npx skills add Panniantong/Agent-Reach@agent-reach
 
 Skillインストール後、エージェントは`agent-reach` CLIが利用可能かを自動検出し、必要に応じてインストールします。
 
-> `agent-reach install` でインストールした場合、Skillは自動的に登録されます — 追加の手順は不要です。
+> `agent-reach install --system` を明示的に許可した場合のみ、Skill は自動登録されます。デフォルトの `agent-reach install` は読み取り専用です。
 </details>
 
 ---
@@ -249,7 +250,7 @@ channels/
 <details>
 <summary><strong>Twitter/X APIに課金せずにAIエージェントで検索するには？</strong></summary>
 
-Agent Reach は [twitter-cli](https://github.com/public-clis/twitter-cli) をCookie認証で使用します。Cookie-Editor で手動エクスポートし、`agent-reach configure twitter-cookies "your_cookies"` で Agent Reach に保存します。これは doctor の設定確認用であり、doctor は上流の認証をリアルタイム検証しません。`twitter search "query" -n 10` を直接実行するプロセスには `TWITTER_AUTH_TOKEN` と `TWITTER_CT0` を明示的に渡してください。
+Agent Reach は [twitter-cli](https://github.com/public-clis/twitter-cli) をCookie認証で使用します。Cookie-Editor で手動エクスポートし、`agent-reach configure twitter-cookies` の非表示入力で Agent Reach に保存します。これは doctor の設定確認用であり、doctor は上流の認証をリアルタイム検証しません。`twitter search "query" -n 10` を直接実行するプロセスには `TWITTER_AUTH_TOKEN` と `TWITTER_CT0` を明示的に渡してください。
 </details>
 
 <details>
@@ -267,7 +268,7 @@ Agent Reach は [rdt-cli](https://github.com/public-clis/rdt-cli) でRedditに�
 <details>
 <summary><strong>Agent Reach は Claude Code / Cursor / Windsurf / OpenClaw で動作する？</strong></summary>
 
-はい！Agent Reach はインストーラー + 設定ツールです。シェルコマンドを実行できるあらゆるAIコーディングエージェントで使用できます — Claude Code、Cursor、Windsurf、OpenClaw、Codex等。`pip install https://github.com/Panniantong/agent-reach/archive/main.zip` の後に `agent-reach install` を実行すると、エージェントはすぐに上流ツールを使い始められます。PyPI の同名パッケージは別プロジェクトです。
+はい！Agent Reach はインストーラー + 設定ツールです。シェルコマンドを実行できるあらゆるAIコーディングエージェントで使用できます — Claude Code、Cursor、Windsurf、OpenClaw、Codex等。`pip install https://github.com/Panniantong/agent-reach/archive/main.zip` の後、まず `agent-reach install` で読み取り専用チェックを行い、システム変更を明示的に許可した場合だけ `agent-reach install --system` を実行します。PyPI の同名パッケージは別プロジェクトです。
 </details>
 
 <details>

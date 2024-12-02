@@ -62,8 +62,11 @@ agent-reach transcribe ./local_audio.mp3 -o /tmp/transcript.txt
 ```
 
 > `agent-reach transcribe` 只接收公开 http(s) URL 或本地音频文件。用 `ytsearch5:` 搜索时，先从 yt-dlp 结果里选出具体视频 URL，再转写。
-> 需要先配置 key：`agent-reach configure groq-key gsk_xxx`（免费，console.groq.com）
-> 或 `agent-reach configure openai-key sk-xxx`。默认 auto 模式：groq 失败自动降级 openai。
+> 需要先配置 key：`agent-reach configure groq-key`（隐藏输入；免费，console.groq.com）
+> 或 `agent-reach configure openai-key`。默认 auto 模式只使用第一个已配置服务商
+>（优先 Groq，否则 OpenAI），失败即停止，不会把音频自动发给另一家。
+> `--allow-provider-fallback` 会显式授权跨服务商降级；同一音频内容可能被 Groq 和
+> OpenAI 分别处理，并可能产生 OpenAI 费用，只应在确认内容可分享给两家后使用。
 
 ## B站 / Bilibili（bili-cli 为主，OpenCLI 补字幕）
 
@@ -123,8 +126,8 @@ curl -s -b /tmp/bili_ck.txt -A "$UA" -e "https://www.bilibili.com/" \
 
 1. **ffmpeg**: `brew install ffmpeg`
 2. **Groq API Key** (免费): https://console.groq.com/keys
-3. **配置 Key**: `agent-reach configure groq-key YOUR_KEY`
-4. **首次运行**: `agent-reach install --env=auto` 安装工具
+3. **配置 Key**: `agent-reach configure groq-key`（隐藏输入）
+4. **首次运行**: `agent-reach install --env=auto --system --channels=xiaoyuzhou`（需用户明确授权）
 
 ### 检查状态
 

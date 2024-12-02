@@ -205,6 +205,19 @@ def test_check_ok_reports_transcription_when_provider_and_ffmpeg_present():
     assert "可转写音频" in message
 
 
+def test_check_lists_multiple_transcription_providers_without_implying_fallback():
+    ch = YouTubeChannel()
+    cfg = Mock()
+    cfg.is_configured = lambda key: key in {"groq_whisper", "openai_whisper"}
+    with patch.object(yt, "probe_command", return_value=ProbeResult("ok")), \
+         patch("shutil.which", side_effect=_which("deno", "ffmpeg", "ffprobe")):
+        status, message = ch.check(config=cfg)
+
+    assert status == "ok"
+    assert "groq/openai" in message
+    assert "groq→openai" not in message
+
+
 def test_check_ok_flags_missing_ffmpeg_for_transcription():
     ch = YouTubeChannel()
     cfg = Mock()
