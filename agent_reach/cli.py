@@ -1979,6 +1979,8 @@ def _cmd_doctor(args=None):
 
 
 def _cmd_setup():
+    import getpass
+
     from agent_reach.config import Config
 
     config = Config()
@@ -2051,7 +2053,7 @@ def _cmd_setup():
     if current:
         print("  当前状态: ✅ 已配置")
     else:
-        key = input("  GITHUB_TOKEN (回车跳过): ").strip()
+        key = getpass.getpass("  GITHUB_TOKEN (回车跳过): ").strip()
         if key:
             config.set("github_token", key)
             print("  ✅ GitHub API 已提升至 5000 次/小时！")
@@ -2072,7 +2074,7 @@ def _cmd_setup():
     if current:
         print("  当前状态: ✅ 已配置")
     else:
-        key = input("  GROQ_API_KEY (回车跳过): ").strip()
+        key = getpass.getpass("  GROQ_API_KEY (回车跳过): ").strip()
         if key:
             config.set("groq_api_key", key)
             print("  ✅ 语音转文字已开启！")

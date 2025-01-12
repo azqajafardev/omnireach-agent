@@ -82,6 +82,42 @@ def test_configure_uses_hidden_prompt_when_no_value_is_given(
     assert secret not in output.err
 
 
+def test_setup_uses_hidden_prompts_for_secrets(monkeypatch, capsys):
+    import getpass
+    import shutil
+
+    import agent_reach.config as config_module
+
+    github_secret = "ghp-secret-from-setup"
+    groq_secret = "gsk-secret-from-setup"
+    secrets = iter([github_secret, groq_secret])
+    prompts = []
+    config = _MemoryConfig()
+    config.config_path = Path("/tmp/agent-reach-test-config.yaml")
+
+    monkeypatch.setattr(config_module, "Config", lambda: config)
+    monkeypatch.setattr(shutil, "which", lambda _name: None)
+    monkeypatch.setattr(
+        getpass,
+        "getpass",
+        lambda prompt: prompts.append(prompt) or next(secrets),
+    )
+
+    cli._cmd_setup()
+
+    assert config.data["github_token"] == github_secret
+    assert config.data["groq_api_key"] == groq_secret
+    assert prompts == [
+        "  GITHUB_TOKEN (回车跳过): ",
+        "  GROQ_API_KEY (回车跳过): ",
+    ]
+    output = capsys.readouterr()
+    assert github_secret not in output.out
+    assert github_secret not in output.err
+    assert groq_secret not in output.out
+    assert groq_secret not in output.err
+
+
 def test_configure_positional_secret_warns_to_use_safe_input(
     monkeypatch, capsys
 ):
