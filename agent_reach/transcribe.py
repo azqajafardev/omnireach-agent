@@ -107,7 +107,8 @@ def _probe_audio_duration(path: Path) -> float:
         proc = subprocess.run(
             cmd,
             capture_output=True,
-            text=True,
+            encoding="utf-8",
+            errors="replace",
             timeout=FFPROBE_TIMEOUT_SECONDS,
         )
     except subprocess.TimeoutExpired:
@@ -158,7 +159,13 @@ def _run(cmd: List[str], timeout: int = 600) -> None:
     network read or a hung probe must not block the CLI forever.
     """
     try:
-        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        proc = subprocess.run(
+            cmd,
+            capture_output=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=timeout,
+        )
     except subprocess.TimeoutExpired:
         raise TranscribeError(f"{cmd[0]} timed out after {timeout}s")
     if proc.returncode != 0:

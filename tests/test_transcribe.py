@@ -828,6 +828,37 @@ class TestMediaGenerationBudget:
             )
 
 
+# --- Subprocess output decoding ---------------------------------------- #
+
+
+class TestSubprocessDecoding:
+    CJK_BYTES = "中文标题".encode("utf-8")
+
+    def _decoding_run(self, returncode: int):
+        def fake_run(cmd, **kwargs):
+            encoding = kwargs.get("encoding") or "gbk"
+            errors = kwargs.get("errors") or "strict"
+            text = self.CJK_BYTES.decode(encoding, errors)
+            return subprocess.CompletedProcess(cmd, returncode, text, text)
+
+        return fake_run
+
+    def test_run_preserves_cjk_failure_as_transcribe_error(self, monkeypatch):
+        monkeypatch.setattr(tr.subprocess, "run", self._decoding_run(1))
+
+        with pytest.raises(tr.TranscribeError, match="yt-dlp"):
+            tr._run(["yt-dlp", "https://example.com/video"], timeout=5)
+
+    def test_probe_preserves_cjk_failure_as_transcribe_error(
+        self, monkeypatch, tmp_path
+    ):
+        monkeypatch.setattr(tr, "_require", lambda _binary: None)
+        monkeypatch.setattr(tr.subprocess, "run", self._decoding_run(1))
+
+        with pytest.raises(tr.TranscribeError, match="duration"):
+            tr._probe_audio_duration(tmp_path / "audio.m4a")
+
+
 # --- YouTubeChannel integration --------------------------------------- #
 
 
