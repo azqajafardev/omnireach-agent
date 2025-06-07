@@ -625,7 +625,8 @@ def _uninstall_skill():
 def _cmd_skill(args):
     """Manage agent skill registration."""
     if args.install:
-        _install_skill()
+        if not _install_skill():
+            raise SystemExit(1)
     elif args.uninstall:
         _uninstall_skill()
 
