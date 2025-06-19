@@ -273,7 +273,7 @@ Agent Reach는 Reddit을 위해 [rdt-cli](https://github.com/public-clis/rdt-cli
 <details>
 <summary><strong>Agent Reach는 Claude Code / Cursor / Windsurf / OpenClaw와 호환되나요?</strong></summary>
 
-네! Agent Reach는 설치 + 설정 도구입니다. Shell 명령을 실행할 수 있는 모든 AI 코딩 에이전트가 사용할 수 있습니다 — Claude Code, Cursor, Windsurf, OpenClaw, Codex 등. `pip install agent-reach`만 실행하고 `agent-reach install`을 실행하면, 에이전트가 즉시 업스트림 도구 사용을 시작할 수 있습니다.
+네! Agent Reach는 설치 + 설정 도구입니다. Shell 명령을 실행할 수 있는 모든 AI 코딩 에이전트가 사용할 수 있습니다 — Claude Code, Cursor, Windsurf, OpenClaw, Codex 등. `pip install https://github.com/Panniantong/agent-reach/archive/main.zip` 실행 후 `agent-reach install`을 실행하면, 에이전트가 즉시 업스트림 도구 사용을 시작할 수 있습니다. PyPI의 동명 패키지는 다른 프로젝트입니다.
 </details>
 
 <details>

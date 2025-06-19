@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -139,3 +140,27 @@ def test_localized_readmes_keep_current_bilibili_and_xhs_routes():
             "xiaohongshu.py  → OpenCLI ▸ xiaohongshu-mcp ▸ xhs-cli"
             in text
         ), path.relative_to(ROOT)
+
+
+def test_public_guidance_never_installs_the_unrelated_pypi_package():
+    """The PyPI name is owned by another project; GitHub URLs are required."""
+    candidates = _policy_documents() + [
+        ROOT / "agent_reach" / "integrations" / "mcp_server.py",
+    ]
+    bare_install = re.compile(
+        r"\bpip\s+install(?:\s+--upgrade)?\s+['\"]?agent-reach(?:\[[^\]]+\])?\b",
+        re.IGNORECASE,
+    )
+    violations = []
+    for path in candidates:
+        for line_number, line in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), 1
+        ):
+            if bare_install.search(line) and (
+                "github.com/Panniantong/agent-reach" not in line
+            ):
+                violations.append(
+                    f"{path.relative_to(ROOT)}:{line_number}: {line.strip()}"
+                )
+
+    assert not violations, "\n".join(violations)
