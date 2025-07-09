@@ -16,6 +16,7 @@ import ssl
 import subprocess
 from unittest.mock import patch
 from urllib.error import URLError
+from urllib.parse import parse_qs, urlsplit
 
 import pytest
 
@@ -186,6 +187,28 @@ def test_get_node_topics_falls_back_to_requested_node_name():
     assert topics[0]["node_name"] == "jobs"
 
 
+@pytest.mark.parametrize(
+    "node_name",
+    ["python&page=99", "foo#bar", "c++", "Python 开发"],
+)
+def test_get_node_topics_percent_encodes_node_name(node_name):
+    ch = V2EXChannel()
+    captured = {}
+
+    def fake_get_json(url):
+        captured["url"] = url
+        return []
+
+    with patch.object(v2, "_get_json", side_effect=fake_get_json):
+        ch.get_node_topics(node_name)
+
+    parts = urlsplit(captured["url"])
+    query = parse_qs(parts.query)
+    assert parts.fragment == ""
+    assert query["node_name"] == [node_name]
+    assert query["page"] == ["1"]
+
+
 # --- get_topic: list-or-dict shape + replies fetch + fallbacks ---
 
 def test_get_topic_unwraps_list_and_maps_replies():
@@ -226,6 +249,26 @@ def test_get_topic_url_fallback_when_missing():
     assert result["url"] == "https://www.v2ex.com/t/99"
 
 
+def test_get_topic_percent_encodes_topic_id_in_both_requests():
+    ch = V2EXChannel()
+    captured = []
+
+    def fake_get_json(url):
+        captured.append(url)
+        return [{"id": 1}] if len(captured) == 1 else []
+
+    with patch.object(v2, "_get_json", side_effect=fake_get_json):
+        ch.get_topic("1#&page=99")
+
+    topic_parts = urlsplit(captured[0])
+    replies_parts = urlsplit(captured[1])
+    assert topic_parts.fragment == ""
+    assert replies_parts.fragment == ""
+    assert parse_qs(topic_parts.query)["id"] == ["1#&page=99"]
+    assert parse_qs(replies_parts.query)["topic_id"] == ["1#&page=99"]
+    assert parse_qs(replies_parts.query)["page"] == ["1"]
+
+
 # --- get_user: field mapping + avatar/url fallbacks ---
 
 def test_get_user_maps_fields_and_prefers_large_avatar():
@@ -250,6 +293,33 @@ def test_get_user_avatar_falls_back_to_normal():
     assert user["url"] == "https://www.v2ex.com/member/neo"
 
 
+def test_get_user_percent_encodes_username():
+    ch = V2EXChannel()
+    captured = {}
+
+    def fake_get_json(url):
+        captured["url"] = url
+        return {}
+
+    with patch.object(v2, "_get_json", side_effect=fake_get_json):
+        ch.get_user("张三&admin=true")
+
+    parts = urlsplit(captured["url"])
+    assert parts.fragment == ""
+    assert parse_qs(parts.query)["username"] == ["张三&admin=true"]
+
+
+def test_fallback_display_urls_percent_encode_path_segments():
+    ch = V2EXChannel()
+    with patch.object(v2, "_get_json", return_value={}):
+        user_url = ch.get_user("a b/c")["url"]
+    with patch.object(v2, "_get_json", side_effect=[{}, []]):
+        topic_url = ch.get_topic("9 9")["url"]
+
+    assert user_url == "https://www.v2ex.com/member/a%20b%2Fc"
+    assert topic_url == "https://www.v2ex.com/t/9%209"
+
+
 # --- search: intentionally offline (no public search endpoint) ---
 
 def test_search_returns_guidance_without_network():
@@ -259,3 +329,11 @@ def test_search_returns_guidance_without_network():
     assert len(results) == 1
     assert "error" in results[0]
     assert "python" in results[0]["error"]
+
+
+def test_search_guidance_percent_encodes_query():
+    ch = V2EXChannel()
+    message = ch.search("rust & go#lang")[0]["error"]
+
+    assert "?q=rust+%26+go%23lang" in message
+    assert "?q=rust & go#lang" not in message
