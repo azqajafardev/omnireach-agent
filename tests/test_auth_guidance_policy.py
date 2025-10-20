@@ -174,6 +174,28 @@ def test_public_guidance_never_installs_the_unrelated_pypi_package():
     assert not violations, "\n".join(violations)
 
 
+def test_public_guidance_never_puts_secrets_in_process_arguments():
+    """Operational docs should use hidden prompts or stdin for credentials."""
+    forbidden = (
+        'agent-reach configure twitter-cookies "',
+        "agent-reach configure twitter-cookies '",
+        'agent-reach configure xhs-cookies "',
+        "agent-reach configure xhs-cookies '",
+        "agent-reach configure groq-key gsk_",
+        "agent-reach configure openai-key sk-",
+        "agent-reach configure github-token gh",
+        "agent-reach configure proxy http",
+    )
+    violations = []
+    for path in _policy_documents():
+        text = path.read_text(encoding="utf-8")
+        for marker in forbidden:
+            if marker in text:
+                violations.append(f"{path.relative_to(ROOT)}: {marker}")
+
+    assert not violations, "\n".join(violations)
+
+
 def test_skill_explains_unverified_backend_state():
     """A null backend is an explicit safety state, not a routing instruction."""
     skills = (

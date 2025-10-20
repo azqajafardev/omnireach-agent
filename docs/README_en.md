@@ -135,18 +135,18 @@ Copy this to your AI Agent (Claude Code, OpenClaw, Cursor, etc.):
 Install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 ```
 
-The Agent auto-installs, detects your environment, and tells you what's ready.
+The Agent installs the Python package, checks your environment, and tells you what's ready. System-level changes require an explicit `--system` flag.
 
 > 🔄 **Already installed?** Update in one command:
 > ```
 > Update Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
 > ```
 
-> 🛡️ **Worried about security?** Use safe mode — it won't auto-install system packages, it only tells you what you need:
+> 🛡️ **Safe by default:** `agent-reach install` checks the machine without installing system packages or writing configuration:
 > ```
-> Install Agent Reach (safe mode): https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
-> Use the --safe flag during install
+> Safely check and install Agent Reach: https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 > ```
+> Use `agent-reach install --system` only after explicitly approving system changes.
 
 <details>
 <summary>Manual install</summary>
@@ -166,10 +166,10 @@ npx skills add Panniantong/Agent-Reach@agent-reach
 
 After the Skill is installed, the Agent will auto-detect whether `agent-reach` CLI is available and install it if needed.
 
-> If you install via `agent-reach install`, the skill is registered automatically — no extra steps needed.
+> If you explicitly install external tools with `agent-reach install --system`, the skill is registered automatically. The default read-only check leaves existing files unchanged.
 >
 > Prefer an English-only skill file? Set an English locale or export `AGENT_REACH_LANG=en`
-> before running `agent-reach install --env=auto` or `agent-reach skill --install`.
+> before running `agent-reach install --env=auto --system` or `agent-reach skill --install`.
 > The installed file is always written as `SKILL.md`, so switching languages means rerunning
 > the install command with the new locale and replacing the previously installed skill file.
 </details>
@@ -292,7 +292,7 @@ Each channel file **actually probes** its candidate backends in order (not just 
 | GitHub | [gh CLI](https://cli.github.com) | — | Official tool, full API after auth |
 | Read RSS | [feedparser](https://github.com/kurtmckee/feedparser) | — | Python ecosystem standard |
 | XiaoHongShu | [OpenCLI](https://github.com/jackwener/opencli) (desktop) | [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) (server) ▸ xhs-cli | OpenCLI uses only an existing user-controlled session; other backends use a manual Cookie-Editor export |
-| LinkedIn | [linkedin-scraper-mcp](https://github.com/stickerdaniel/linkedin-mcp-server) | Jina Reader | MCP server, browser automation |
+| LinkedIn | [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server) | Jina Reader | MCP server, browser automation |
 | Xiaoyuzhou Podcast | `transcribe.sh` | — | `bash ~/.agent-reach/tools/xiaoyuzhou/transcribe.sh <URL>` |
 
 > 📌 These are the *current* choices, re-verified regularly on real machines. When a path dies we switch to the next — `agent-reach doctor` always tells you which one is active.
@@ -301,7 +301,7 @@ Each channel file **actually probes** its candidate backends in order (not just 
 
 ## Credits
 
-[twitter-cli](https://github.com/public-clis/twitter-cli) · [rdt-cli](https://github.com/public-clis/rdt-cli) · [xhs-cli](https://github.com/jackwener/xiaohongshu-cli) · [bili-cli](https://github.com/public-clis/bilibili-cli) · [yt-dlp](https://github.com/yt-dlp/yt-dlp) · [Jina Reader](https://github.com/jina-ai/reader) · [Exa](https://exa.ai) · [mcporter](https://github.com/nicobailon/mcporter) · [feedparser](https://github.com/kurtmckee/feedparser) · [linkedin-scraper-mcp](https://github.com/stickerdaniel/linkedin-mcp-server)
+[twitter-cli](https://github.com/public-clis/twitter-cli) · [rdt-cli](https://github.com/public-clis/rdt-cli) · [xhs-cli](https://github.com/jackwener/xiaohongshu-cli) · [bili-cli](https://github.com/public-clis/bilibili-cli) · [yt-dlp](https://github.com/yt-dlp/yt-dlp) · [Jina Reader](https://github.com/jina-ai/reader) · [Exa](https://exa.ai) · [mcporter](https://github.com/nicobailon/mcporter) · [feedparser](https://github.com/kurtmckee/feedparser) · [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server)
 
 ## Contact
 
