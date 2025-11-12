@@ -142,6 +142,14 @@ def test_localized_readmes_keep_current_bilibili_and_xhs_routes():
         ), path.relative_to(ROOT)
 
 
+def test_localized_readmes_do_not_advertise_retired_channels():
+    """Japanese and Korean docs must match the channels shipped by the CLI."""
+    for path in (ROOT / "docs" / "README_ja.md", ROOT / "docs" / "README_ko.md"):
+        text = path.read_text(encoding="utf-8").lower()
+        assert "douyin" not in text, path.relative_to(ROOT)
+        assert "weibo" not in text, path.relative_to(ROOT)
+
+
 def test_public_guidance_never_installs_the_unrelated_pypi_package():
     """The PyPI name is owned by another project; GitHub URLs are required."""
     candidates = _policy_documents() + [

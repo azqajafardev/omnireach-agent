@@ -411,10 +411,10 @@ def _cmd_install(args):
 
 
 def _install_skill(force: bool = True):
-    """Install Agent Reach as an agent skill (OpenClaw / Claude Code / .agents)."""
+    """Install Agent Reach as an agent skill for supported agent clients."""
+    import importlib.resources
     import os
     import shutil
-    import importlib.resources
 
     def _is_english_locale(value: str) -> bool:
         normalized = value.strip().lower()
@@ -482,25 +482,28 @@ def _install_skill(force: bool = True):
             print(f"  Warning: Could not install skill: {e}")
             return None
 
-    # Determine skill install path (priority: .agents > openclaw > claude)
+    # Install into every known skill root that already exists.
     skill_dirs = [
-        os.path.expanduser("~/.agents/skills"),      # Generic agents (priority)
-        os.path.expanduser("~/.openclaw/skills"),    # OpenClaw
-        os.path.expanduser("~/.claude/skills"),      # Claude Code (if exists)
+        (os.path.expanduser("~/.agents/skills"), "Agent"),
+        (os.path.expanduser("~/.config/opencode/skills"), "OpenCode"),
+        (os.path.expanduser("~/.openclaw/skills"), "OpenClaw"),
+        (os.path.expanduser("~/.claude/skills"), "Claude Code"),
     ]
 
     # Insert OPENCLAW_HOME path at the beginning if environment variable is set
     openclaw_home = os.environ.get("OPENCLAW_HOME")
     if openclaw_home:
-        skill_dirs.insert(0, os.path.join(openclaw_home, ".openclaw", "skills"))
+        skill_dirs.insert(
+            0,
+            (os.path.join(openclaw_home, ".openclaw", "skills"), "OpenClaw"),
+        )
 
     installed = False
-    for skill_dir in skill_dirs:
+    for skill_dir, platform_name in skill_dirs:
         if os.path.isdir(skill_dir):
             target = os.path.join(skill_dir, "agent-reach")
             status = _copy_skill_dir(target)
             if status:
-                platform_name = "Agent" if ".agents" in skill_dir else "OpenClaw" if "openclaw" in skill_dir else "Claude Code"
                 if status == "preserved":
                     print(f"Skill already installed for {platform_name}, preserving existing files: {target}")
                 else:
@@ -518,7 +521,10 @@ def _install_skill(force: bool = True):
             print(f"Skill installed: {target}")
         else:
             print("  -- Could not install agent skill (optional)")
-            print("  -- Tip: install OpenClaw, Claude Code, or create ~/.agents/skills/ manually")
+            print(
+                "  -- Tip: install OpenCode, OpenClaw, Claude Code, "
+                "or create ~/.agents/skills/ manually"
+            )
 
 
 def _uninstall_skill():
@@ -526,6 +532,7 @@ def _uninstall_skill():
     import shutil
 
     skill_dirs = [
+        ("~/.config/opencode/skills/agent-reach", "OpenCode"),
         ("~/.openclaw/skills/agent-reach", "OpenClaw"),
         ("~/.claude/skills/agent-reach", "Claude Code"),
         ("~/.agents/skills/agent-reach", "Agent"),
@@ -1649,6 +1656,7 @@ def _cmd_uninstall(args):
 
     # ── 2. Skill files ──
     skill_dirs = [
+        ("~/.config/opencode/skills/agent-reach", "OpenCode"),
         ("~/.openclaw/skills/agent-reach", "OpenClaw"),
         ("~/.claude/skills/agent-reach", "Claude Code"),
         ("~/.agents/skills/agent-reach", "Agent"),
