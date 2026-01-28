@@ -74,6 +74,8 @@ def test_get_json_retries_unexpected_tls_eof_with_bounded_curl():
     command = run.call_args.args[0]
     assert command[0] == "C:/Windows/System32/curl.exe"
     assert "--fail" in command
+    assert command[command.index("--proto") + 1] == "=https"
+    assert "--location" not in command
     assert "--max-time" in command
     assert "--max-filesize" in command
     assert command[-2:] == [
@@ -94,6 +96,41 @@ def test_get_json_does_not_hide_certificate_verification_failures():
         with pytest.raises(ssl.SSLCertVerificationError):
             v2._get_json("https://www.v2ex.com/api/topics/hot.json")
 
+    run.assert_not_called()
+
+
+def test_get_json_does_not_fallback_for_plain_error_text():
+    fake_error = RuntimeError(
+        "UNEXPECTED_EOF_WHILE_READING appeared in an unrelated message"
+    )
+
+    with patch.object(
+        v2, "_get_json_with_urllib", side_effect=fake_error
+    ), patch.object(v2.subprocess, "run") as run:
+        with pytest.raises(RuntimeError, match="unrelated"):
+            v2._get_json("https://www.v2ex.com/api/topics/hot.json")
+
+    run.assert_not_called()
+
+
+@pytest.mark.parametrize(
+    "url",
+    [
+        "http://www.v2ex.com/api/topics/hot.json",
+        "https://v2ex.com.evil.test/api/topics/hot.json",
+        "https://user:pass@www.v2ex.com/api/topics/hot.json",
+        "https://www.v2ex.com:8443/api/topics/hot.json",
+        "https://www.v2ex.com/about",
+    ],
+)
+def test_get_json_rejects_non_api_targets_before_network(url):
+    with patch.object(v2.urllib.request, "urlopen") as urlopen, patch.object(
+        v2.subprocess, "run"
+    ) as run:
+        with pytest.raises(ValueError, match="V2EX HTTPS API"):
+            v2._get_json(url)
+
+    urlopen.assert_not_called()
     run.assert_not_called()
 
 

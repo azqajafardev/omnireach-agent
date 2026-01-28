@@ -7,6 +7,7 @@ import ssl
 import subprocess
 import urllib.request
 from typing import Any
+from urllib.parse import urlsplit
 
 from agent_reach.utils.process import utf8_subprocess_env
 from agent_reach.utils.text import scrub_url_credentials
@@ -18,8 +19,27 @@ _TIMEOUT = 10
 _MAX_RESPONSE_BYTES = 1024 * 1024
 
 
+def _validate_api_url(url: str) -> None:
+    """Allow only the public V2EX HTTPS JSON API."""
+    try:
+        parsed = urlsplit(url)
+        port = parsed.port
+    except ValueError as exc:
+        raise ValueError("invalid V2EX API URL") from exc
+    if (
+        parsed.scheme.lower() != "https"
+        or (parsed.hostname or "").lower() not in {"v2ex.com", "www.v2ex.com"}
+        or port not in {None, 443}
+        or parsed.username is not None
+        or parsed.password is not None
+        or not parsed.path.startswith("/api/")
+    ):
+        raise ValueError("only the V2EX HTTPS API is allowed")
+
+
 def _get_json_with_urllib(url: str) -> Any:
     """Fetch JSON with Python's standard HTTP stack."""
+    _validate_api_url(url)
     req = urllib.request.Request(url, headers={"User-Agent": _UA})
     with urllib.request.urlopen(req, timeout=_TIMEOUT) as resp:
         raw = resp.read(_MAX_RESPONSE_BYTES + 1)
@@ -37,12 +57,15 @@ def _is_unexpected_tls_eof(error: BaseException) -> bool:
         if id(current) in seen:
             continue
         seen.add(id(current))
-        text = str(current).casefold()
-        if (
-            "unexpected_eof_while_reading" in text
-            or "eof occurred in violation of protocol" in text
+        if isinstance(current, ssl.SSLError) and not isinstance(
+            current, ssl.SSLCertVerificationError
         ):
-            return True
+            text = str(current).casefold()
+            if (
+                "unexpected_eof_while_reading" in text
+                or "eof occurred in violation of protocol" in text
+            ):
+                return True
         for nested in (
             getattr(current, "reason", None),
             current.__cause__,
@@ -55,6 +78,7 @@ def _is_unexpected_tls_eof(error: BaseException) -> bool:
 
 def _get_json_with_curl(url: str) -> Any:
     """Fetch bounded JSON with the OS curl TLS stack."""
+    _validate_api_url(url)
     curl = shutil.which("curl")
     if not curl:
         raise RuntimeError("curl is unavailable for the V2EX TLS fallback")
@@ -64,7 +88,8 @@ def _get_json_with_curl(url: str) -> Any:
         "--fail",
         "--silent",
         "--show-error",
-        "--location",
+        "--proto",
+        "=https",
         "--connect-timeout",
         "5",
         "--max-time",
