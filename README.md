@@ -162,7 +162,7 @@ AI Agent 已经能帮你写代码、改文档、管项目——但你让它去�
 <details>
 <summary>它会做什么？（点击展开）</summary>
 
-1. **安装 CLI 工具** — `pip install` 装好 `agent-reach` 命令行（自带 yt-dlp、feedparser）
+1. **安装 CLI 工具** — 从本仓库安装 `agent-reach` 命令行（自带 yt-dlp、feedparser；不要从 PyPI 安装同名包，它不是本项目）
 2. **安装系统基建** — 自动检测并安装 Node.js、gh CLI、mcporter
 3. **配置搜索引擎** — 通过 MCP 接入 Exa（免费，无需 API Key）
 4. **检测环境** — 判断是本地电脑还是服务器，给出对应的配置建议

@@ -27,11 +27,35 @@ URL="${1:?用法: bash transcribe.sh [--polish] <小宇宙链接> [输出文件�
 OUTPUT="${2:-/tmp/podcast_transcript.txt}"
 TMPDIR="/tmp/xiaoyuzhou_$$"
 
+PYTHON_CMD=()
+ensure_python() {
+    if [ "${#PYTHON_CMD[@]}" -gt 0 ]; then
+        return 0
+    fi
+    if command -v python3 >/dev/null 2>&1; then
+        PYTHON_CMD=(python3)
+    elif command -v python >/dev/null 2>&1; then
+        PYTHON_CMD=(python)
+    elif command -v py >/dev/null 2>&1; then
+        PYTHON_CMD=(py -3)
+    else
+        echo "❌ 未找到 Python（尝试过 python3、python、py -3）" >&2
+        return 1
+    fi
+}
+
 # Try env var first, then agent-reach config.yaml
 if [ -z "$GROQ_API_KEY" ]; then
     CONFIG_FILE="$HOME/.agent-reach/config.yaml"
     if [ -f "$CONFIG_FILE" ]; then
-        GROQ_API_KEY=$(python3 -c "import yaml; print((yaml.safe_load(open('$CONFIG_FILE')) or {}).get('groq_api_key',''))" 2>/dev/null || true)
+        ensure_python || exit 1
+        CONFIG_FOR_PYTHON="$CONFIG_FILE"
+        if command -v cygpath >/dev/null 2>&1; then
+            CONFIG_FOR_PYTHON=$(cygpath -w "$CONFIG_FILE")
+        fi
+        GROQ_API_KEY=$(AGENT_REACH_CONFIG_FILE="$CONFIG_FOR_PYTHON" \
+            "${PYTHON_CMD[@]}" -c 'import os, yaml; print((yaml.safe_load(open(os.environ["AGENT_REACH_CONFIG_FILE"])) or {}).get("groq_api_key", ""))' \
+            2>/dev/null || true)
     fi
 fi
 GROQ_API_KEY="${GROQ_API_KEY:?请设置 GROQ_API_KEY 环境变量或运行 agent-reach configure groq-key}"
@@ -81,7 +105,8 @@ echo "⏱️  时长: ${DURATION_MIN}分${DURATION_SEC}秒"
 echo "🔄 正在转码..."
 ffmpeg -y -i "$TMPDIR/original.$EXT" -b:a "$AUDIO_BITRATE" -ac 1 "$TMPDIR/mono.mp3" 2>/dev/null
 MONO_SIZE=$(stat -c%s "$TMPDIR/mono.mp3" 2>/dev/null || stat -f%z "$TMPDIR/mono.mp3")
-echo "📦 转码后: $(echo "$MONO_SIZE / 1024 / 1024" | bc)MB"
+MONO_SIZE_MB=$(awk -v bytes="$MONO_SIZE" 'BEGIN { printf "%.1f", bytes / 1024 / 1024 }')
+echo "📦 转码后: ${MONO_SIZE_MB}MB"
 
 # Step 5: 按大小切片
 MAX_BYTES=$((MAX_CHUNK_SIZE_MB * 1024 * 1024))
@@ -151,6 +176,11 @@ for i in $(seq 0 $((NUM_CHUNKS - 1))); do
                 exit 1
             fi
         else
+            case "$HTTP_CODE" in
+                5??)
+                    echo "   可尝试兜底：agent-reach transcribe \"$AUDIO_URL\""
+                    ;;
+            esac
             exit 1
         fi
     fi
@@ -162,13 +192,14 @@ done
 
 # Step 6.5 (可选): 用 Llama 3.3 70B 给文稿补标点+分段
 if [ "$POLISH" = "1" ]; then
+    ensure_python || exit 1
     echo "✨ 正在润色（Llama 3.3 70B 加标点+分段）..."
     for i in $(seq 0 $((NUM_CHUNKS - 1))); do
         echo -n "   段 $((i+1))/$NUM_CHUNKS... "
         IN_FILE="$TMPDIR/transcript_${i}.txt" \
         OUT_FILE="$TMPDIR/polished_${i}.txt" \
         GROQ_API_KEY="$GROQ_API_KEY" \
-        python3 <<'PY'
+        "${PYTHON_CMD[@]}" <<'PY'
 import json, os, sys, urllib.request, urllib.error
 
 KEY = os.environ["GROQ_API_KEY"]
