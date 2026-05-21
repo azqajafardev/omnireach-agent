@@ -1482,17 +1482,13 @@ def _configure_xhs_cookies(value) -> bool:
     docker = shutil.which("docker")
     if not docker:
         # No Docker - write to a local file for manual import.
-        from pathlib import Path
-
         from agent_reach.utils.paths import (
             PrivatePathError,
             atomic_write_private_text,
+            home_dir,
         )
 
-        cookie_path = (
-            Path(os.path.expanduser("~/.agent-reach"))
-            / "xhs-cookies.json"
-        )
+        cookie_path = home_dir() / ".agent-reach" / "xhs-cookies.json"
         try:
             atomic_write_private_text(cookie_path, cookies_json)
         except (OSError, PrivatePathError) as exc:
@@ -1600,6 +1596,8 @@ def _cmd_uninstall(args):
     import shutil
     import subprocess
 
+    from agent_reach.utils.paths import home_dir
+
     dry_run = args.dry_run
     keep_config = args.keep_config
 
@@ -1615,7 +1613,7 @@ def _cmd_uninstall(args):
     mcporter_cleanup_skipped = False
 
     # ── 1. Config directory (~/.agent-reach/) ──
-    config_dir = os.path.expanduser("~/.agent-reach")
+    config_dir = home_dir() / ".agent-reach"
     if not keep_config:
         if os.path.isdir(config_dir):
             if dry_run:
@@ -1637,8 +1635,8 @@ def _cmd_uninstall(args):
     # provenance marker it would be unsafe to delete them automatically, so
     # surface every exact path that may still contain Twitter credentials.
     legacy_credential_paths = (
-        os.path.expanduser("~/.config/xfetch/session.json"),
-        os.path.expanduser("~/.config/bird/credentials.env"),
+        home_dir() / ".config" / "xfetch" / "session.json",
+        home_dir() / ".config" / "bird" / "credentials.env",
     )
     present_legacy_paths = [
         path for path in legacy_credential_paths if os.path.lexists(path)
