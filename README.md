@@ -1,11 +1,13 @@
-<h1 align="center">👁️ Agent Reach</h1>
+<h1 align="center">ðŸ‘ï¸ omnireach-agent</h1>
+
+> **é¡¹ç›®åç§°ï¼š** omnireach-agentã€‚ä»¥ä¸‹åŽŸä»“åº“é“¾æŽ¥ã€æ˜Ÿæ ‡ç»Ÿè®¡ã€èµžåŠ©å•†ã€è”ç³»æ–¹å¼åŠ `agent-reach` å‘½ä»¤ä»å±žäºŽä¸Šæ¸¸ Agent Reach é¡¹ç›®ï¼›è¯·æŒ‰åŽŸåç§°è¿è¡Œå®‰è£…å’Œé…ç½®å‘½ä»¤ã€‚
 
 <p align="center">
-  <strong>给你的 AI Agent 一键装上互联网能力</strong>
+  <strong>ç»™ä½ çš„ AI Agent ä¸€é”®è£…ä¸Šäº’è”ç½‘èƒ½åŠ›</strong>
 </p>
 
 <p align="center">
-  当下最稳的接入方式，替你选好、装好、体检好——接入方式会换代，你不用操心
+  å½“ä¸‹æœ€ç¨³çš„æŽ¥å…¥æ–¹å¼ï¼Œæ›¿ä½ é€‰å¥½ã€è£…å¥½ã€ä½“æ£€å¥½â€”â€”æŽ¥å…¥æ–¹å¼ä¼šæ¢ä»£ï¼Œä½ ä¸ç”¨æ“å¿ƒ
 </p>
 
 <p align="center">
@@ -20,34 +22,34 @@
 </p>
 
 <p align="center">
-  <a href="#快速上手">快速开始</a> · <a href="docs/README_en.md">English</a> · <a href="docs/README_ja.md">日本語</a> · <a href="docs/README_ko.md">한국어</a> · <a href="#支持的平台">支持平台</a> · <a href="#设计理念">设计理念</a>
+  <a href="#å¿«é€Ÿä¸Šæ‰‹">å¿«é€Ÿå¼€å§‹</a> Â· <a href="docs/README_en.md">English</a> Â· <a href="docs/README_ja.md">æ—¥æœ¬èªž</a> Â· <a href="docs/README_ko.md">í•œêµ­ì–´</a> Â· <a href="#æ”¯æŒçš„å¹³å°">æ”¯æŒå¹³å°</a> Â· <a href="#è®¾è®¡ç†å¿µ">è®¾è®¡ç†å¿µ</a>
 </p>
 
 ---
 
-## ❤️赞助商
+## â¤ï¸èµžåŠ©å•†
 
-> [想出现在这里？](mailto:pnt01@foxmail.com)
+> [æƒ³å‡ºçŽ°åœ¨è¿™é‡Œï¼Ÿ](mailto:pnt01@foxmail.com)
 
 <details open>
-<summary>点击折叠</summary>
+<summary>ç‚¹å‡»æŠ˜å </summary>
 
 <table>
 <tr>
 <td width="180" align="center"><a href="https://www.browseract.ai/Agent"><img src="docs/assets/sponsors/browseract.png" alt="BrowserAct" width="150"></a></td>
-<td><a href="https://www.browseract.ai/Agent">BrowserAct</a> 支持从 Amazon、LinkedIn、X、Google Maps 等复杂网站提取你需要的任意数据。你只需用自然语言描述抓取需求，Agent 就会基于真实浏览器自动探索并测试页面流程，生成可靠、可复用的数据采集 Bot，并返回结构化结果。无需手动构建爬虫，无需编写代码。BrowserAct 内置隐身浏览、验证码处理和高质量住宅代理，帮助你更稳定地完成复杂网页数据采集。新用户注册即送 1000 积分，<a href="https://www.browseract.ai/Agent">立即免费试用</a>。</td>
+<td><a href="https://www.browseract.ai/Agent">BrowserAct</a> æ”¯æŒä»Ž Amazonã€LinkedInã€Xã€Google Maps ç­‰å¤æ‚ç½‘ç«™æå–ä½ éœ€è¦çš„ä»»æ„æ•°æ®ã€‚ä½ åªéœ€ç”¨è‡ªç„¶è¯­è¨€æè¿°æŠ“å–éœ€æ±‚ï¼ŒAgent å°±ä¼šåŸºäºŽçœŸå®žæµè§ˆå™¨è‡ªåŠ¨æŽ¢ç´¢å¹¶æµ‹è¯•é¡µé¢æµç¨‹ï¼Œç”Ÿæˆå¯é ã€å¯å¤ç”¨çš„æ•°æ®é‡‡é›† Botï¼Œå¹¶è¿”å›žç»“æž„åŒ–ç»“æžœã€‚æ— éœ€æ‰‹åŠ¨æž„å»ºçˆ¬è™«ï¼Œæ— éœ€ç¼–å†™ä»£ç ã€‚BrowserAct å†…ç½®éšèº«æµè§ˆã€éªŒè¯ç å¤„ç†å’Œé«˜è´¨é‡ä½å®…ä»£ç†ï¼Œå¸®åŠ©ä½ æ›´ç¨³å®šåœ°å®Œæˆå¤æ‚ç½‘é¡µæ•°æ®é‡‡é›†ã€‚æ–°ç”¨æˆ·æ³¨å†Œå³é€ 1000 ç§¯åˆ†ï¼Œ<a href="https://www.browseract.ai/Agent">ç«‹å³å…è´¹è¯•ç”¨</a>ã€‚</td>
 </tr>
 <tr>
-<td width="180" align="center"><a href="https://www.tencentcloud.com/act/pro/intl-openclaw?referral_code=G76Y819A&amp;lang=zh&amp;pg="><img src="docs/assets/sponsors/tencent-cloud.svg" alt="腾讯云 OpenClaw" width="150"></a></td>
-<td>在腾讯云 Lighthouse 秒级部署 OpenClaw 全能助手，可通过对话丝滑接入 Agent Reach，给你的 OpenClaw 一键装上互联网能力。</td>
+<td width="180" align="center"><a href="https://www.tencentcloud.com/act/pro/intl-openclaw?referral_code=G76Y819A&amp;lang=zh&amp;pg="><img src="docs/assets/sponsors/tencent-cloud.svg" alt="è…¾è®¯äº‘ OpenClaw" width="150"></a></td>
+<td>åœ¨è…¾è®¯äº‘ Lighthouse ç§’çº§éƒ¨ç½² OpenClaw å…¨èƒ½åŠ©æ‰‹ï¼Œå¯é€šè¿‡å¯¹è¯ä¸æ»‘æŽ¥å…¥ omnireach-agentï¼Œç»™ä½ çš„ OpenClaw ä¸€é”®è£…ä¸Šäº’è”ç½‘èƒ½åŠ›ã€‚</td>
 </tr>
 <tr>
 <td width="180" align="center"><a href="https://www.coreclaw.com/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=Reach&amp;utm_term=Reach&amp;utm_id=Reach"><img src="docs/assets/sponsors/coreclaw.png" alt="CoreClaw" width="150"></a></td>
-<td><a href="https://www.coreclaw.com/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=Reach&amp;utm_term=Reach&amp;utm_id=Reach">CoreClaw</a> | 网页抓取平台与现成数据采集工具，CoreClaw 提供 100+ 现成数据采集工具，支持 Amazon、TikTok、Google Maps、Instagram、Facebook、YouTube 等平台，无需代码，支持 JSON/CSV 导出，仅对成功结果计费。<a href="https://www.coreclaw.com/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=Reach&amp;utm_term=Reach&amp;utm_id=Reach">免费$3测试！</a></td>
+<td><a href="https://www.coreclaw.com/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=Reach&amp;utm_term=Reach&amp;utm_id=Reach">CoreClaw</a> | ç½‘é¡µæŠ“å–å¹³å°ä¸ŽçŽ°æˆæ•°æ®é‡‡é›†å·¥å…·ï¼ŒCoreClaw æä¾› 100+ çŽ°æˆæ•°æ®é‡‡é›†å·¥å…·ï¼Œæ”¯æŒ Amazonã€TikTokã€Google Mapsã€Instagramã€Facebookã€YouTube ç­‰å¹³å°ï¼Œæ— éœ€ä»£ç ï¼Œæ”¯æŒ JSON/CSV å¯¼å‡ºï¼Œä»…å¯¹æˆåŠŸç»“æžœè®¡è´¹ã€‚<a href="https://www.coreclaw.com/?utm_source=github&amp;utm_medium=referral&amp;utm_campaign=Reach&amp;utm_term=Reach&amp;utm_id=Reach">å…è´¹$3æµ‹è¯•ï¼</a></td>
 </tr>
 <tr>
-<td width="180" align="center"><a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_Agent"><img src="docs/assets/sponsors/astraflow.png" alt="星图 AstraFlow" width="150"></a></td>
-<td><a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_Agent">优刻得星图astraflow大模型</a>，支持200+模型一键调用：内置 Kimi K3、DeepSeek V4/V3、Qwen 3、GLM5.2、happyhorse等全球领先开源大模型，无需自训，开箱即用</td>
+<td width="180" align="center"><a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_Agent"><img src="docs/assets/sponsors/astraflow.png" alt="æ˜Ÿå›¾ AstraFlow" width="150"></a></td>
+<td><a href="https://www.ucloud.cn/site/active/astraflow?ytag=geo_waituo_Agent">ä¼˜åˆ»å¾—æ˜Ÿå›¾astraflowå¤§æ¨¡åž‹</a>ï¼Œæ”¯æŒ200+æ¨¡åž‹ä¸€é”®è°ƒç”¨ï¼šå†…ç½® Kimi K3ã€DeepSeek V4/V3ã€Qwen 3ã€GLM5.2ã€happyhorseç­‰å…¨çƒé¢†å…ˆå¼€æºå¤§æ¨¡åž‹ï¼Œæ— éœ€è‡ªè®­ï¼Œå¼€ç®±å³ç”¨</td>
 </tr>
 </table>
 
@@ -55,297 +57,297 @@
 
 ---
 
-## 为什么需要 Agent Reach？
+## ä¸ºä»€ä¹ˆéœ€è¦ omnireach-agentï¼Ÿ
 
-AI Agent 已经能帮你写代码、改文档、管项目——但你让它去网上找点东西，它就抓瞎了：
+AI Agent å·²ç»èƒ½å¸®ä½ å†™ä»£ç ã€æ”¹æ–‡æ¡£ã€ç®¡é¡¹ç›®â€”â€”ä½†ä½ è®©å®ƒåŽ»ç½‘ä¸Šæ‰¾ç‚¹ä¸œè¥¿ï¼Œå®ƒå°±æŠ“çžŽäº†ï¼š
 
-- 📺 "帮我看看这个 YouTube 教程讲了什么" → **看不了**，拿不到字幕
-- 🐦 "帮我搜一下推特上大家怎么评价这个产品" → **搜不了**，Twitter API 要付费
-- 📖 "去 Reddit 上看看有没有人遇到过同样的 bug" → **403 被封**，服务器 IP 被拒
-- 📕 "帮我看看小红书上这个品的口碑" → **打不开**，必须登录才能看
-- 📺 "B站上有个技术视频，帮我总结一下" → **拿不到**，通用下载工具被 B站风控全面拦截
-- 🔍 "帮我在网上搜一下最新的 LLM 框架对比" → **没有好用的搜索**，要么付费要么质量差
-- 🌐 "帮我看看这个网页写了啥" → **抓回来一堆 HTML 标签**，根本没法读
-- 📦 "这个 GitHub 仓库是干嘛的？Issue 里说了什么？" → 能用，但认证配置很麻烦
-- 📡 "帮我订阅这几个 RSS 源，有更新告诉我" → 要自己装库写代码
+- ðŸ“º "å¸®æˆ‘çœ‹çœ‹è¿™ä¸ª YouTube æ•™ç¨‹è®²äº†ä»€ä¹ˆ" â†’ **çœ‹ä¸äº†**ï¼Œæ‹¿ä¸åˆ°å­—å¹•
+- ðŸ¦ "å¸®æˆ‘æœä¸€ä¸‹æŽ¨ç‰¹ä¸Šå¤§å®¶æ€Žä¹ˆè¯„ä»·è¿™ä¸ªäº§å“" â†’ **æœä¸äº†**ï¼ŒTwitter API è¦ä»˜è´¹
+- ðŸ“– "åŽ» Reddit ä¸Šçœ‹çœ‹æœ‰æ²¡æœ‰äººé‡åˆ°è¿‡åŒæ ·çš„ bug" â†’ **403 è¢«å°**ï¼ŒæœåŠ¡å™¨ IP è¢«æ‹’
+- ðŸ“• "å¸®æˆ‘çœ‹çœ‹å°çº¢ä¹¦ä¸Šè¿™ä¸ªå“çš„å£ç¢‘" â†’ **æ‰“ä¸å¼€**ï¼Œå¿…é¡»ç™»å½•æ‰èƒ½çœ‹
+- ðŸ“º "Bç«™ä¸Šæœ‰ä¸ªæŠ€æœ¯è§†é¢‘ï¼Œå¸®æˆ‘æ€»ç»“ä¸€ä¸‹" â†’ **æ‹¿ä¸åˆ°**ï¼Œé€šç”¨ä¸‹è½½å·¥å…·è¢« Bç«™é£ŽæŽ§å…¨é¢æ‹¦æˆª
+- ðŸ” "å¸®æˆ‘åœ¨ç½‘ä¸Šæœä¸€ä¸‹æœ€æ–°çš„ LLM æ¡†æž¶å¯¹æ¯”" â†’ **æ²¡æœ‰å¥½ç”¨çš„æœç´¢**ï¼Œè¦ä¹ˆä»˜è´¹è¦ä¹ˆè´¨é‡å·®
+- ðŸŒ "å¸®æˆ‘çœ‹çœ‹è¿™ä¸ªç½‘é¡µå†™äº†å•¥" â†’ **æŠ“å›žæ¥ä¸€å † HTML æ ‡ç­¾**ï¼Œæ ¹æœ¬æ²¡æ³•è¯»
+- ðŸ“¦ "è¿™ä¸ª GitHub ä»“åº“æ˜¯å¹²å˜›çš„ï¼ŸIssue é‡Œè¯´äº†ä»€ä¹ˆï¼Ÿ" â†’ èƒ½ç”¨ï¼Œä½†è®¤è¯é…ç½®å¾ˆéº»çƒ¦
+- ðŸ“¡ "å¸®æˆ‘è®¢é˜…è¿™å‡ ä¸ª RSS æºï¼Œæœ‰æ›´æ–°å‘Šè¯‰æˆ‘" â†’ è¦è‡ªå·±è£…åº“å†™ä»£ç 
 
-**这些不难实现，但是需要自己折腾配置**
+**è¿™äº›ä¸éš¾å®žçŽ°ï¼Œä½†æ˜¯éœ€è¦è‡ªå·±æŠ˜è…¾é…ç½®**
 
-每个平台都有自己的门槛——要付费的 API、要绕过的封锁、要登录的账号、要清洗的数据。你要一个一个去踩坑、装工具、调配置，光是让 Agent 能读个推特就得折腾半天。
+æ¯ä¸ªå¹³å°éƒ½æœ‰è‡ªå·±çš„é—¨æ§›â€”â€”è¦ä»˜è´¹çš„ APIã€è¦ç»•è¿‡çš„å°é”ã€è¦ç™»å½•çš„è´¦å·ã€è¦æ¸…æ´—çš„æ•°æ®ã€‚ä½ è¦ä¸€ä¸ªä¸€ä¸ªåŽ»è¸©å‘ã€è£…å·¥å…·ã€è°ƒé…ç½®ï¼Œå…‰æ˜¯è®© Agent èƒ½è¯»ä¸ªæŽ¨ç‰¹å°±å¾—æŠ˜è…¾åŠå¤©ã€‚
 
-**Agent Reach 把这件事变成一句话：**
-
-```
-帮我安装 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
-```
-
-复制给你的 Agent，几分钟后它就能读推特、搜 Reddit、看 YouTube、刷小红书了。
-
-**已经装过了？更新也是一句话：**
+**omnireach-agent æŠŠè¿™ä»¶äº‹å˜æˆä¸€å¥è¯ï¼š**
 
 ```
-帮我更新 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+å¸®æˆ‘å®‰è£… Agent Reachï¼šhttps://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 ```
 
-> ⭐ **Star 这个项目**，我们会持续追踪各平台的变化、接入新的渠道。你不用自己盯——平台封了我们修，有新渠道我们加。
+å¤åˆ¶ç»™ä½ çš„ Agentï¼Œå‡ åˆ†é’ŸåŽå®ƒå°±èƒ½è¯»æŽ¨ç‰¹ã€æœ Redditã€çœ‹ YouTubeã€åˆ·å°çº¢ä¹¦äº†ã€‚
 
-### ✅ 在你用之前，你可能想知道
+**å·²ç»è£…è¿‡äº†ï¼Ÿæ›´æ–°ä¹Ÿæ˜¯ä¸€å¥è¯ï¼š**
+
+```
+å¸®æˆ‘æ›´æ–° Agent Reachï¼šhttps://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+```
+
+> â­ **Star è¿™ä¸ªé¡¹ç›®**ï¼Œæˆ‘ä»¬ä¼šæŒç»­è¿½è¸ªå„å¹³å°çš„å˜åŒ–ã€æŽ¥å…¥æ–°çš„æ¸ é“ã€‚ä½ ä¸ç”¨è‡ªå·±ç›¯â€”â€”å¹³å°å°äº†æˆ‘ä»¬ä¿®ï¼Œæœ‰æ–°æ¸ é“æˆ‘ä»¬åŠ ã€‚
+
+### âœ… åœ¨ä½ ç”¨ä¹‹å‰ï¼Œä½ å¯èƒ½æƒ³çŸ¥é“
 
 | | |
 |---|---|
-| 💰 **完全免费** | 所有工具开源、所有 API 免费。唯一可能花钱的是服务器代理（$1/月），本地电脑不需要 |
-| 🔒 **隐私安全** | Cookie 只存在你本地，不上传不外传。代码完全开源，随时可审查 |
-| 🔄 **持续换代** | 每个平台都是「首选 + 备选」多后端路由。某个接入方式失效了，我们换下一个，你无感（2026-06 实例：yt-dlp 被 B站风控封死 → 已切换 bili-cli，用户零操作） |
-| 🤖 **兼容所有 Agent** | Claude Code、OpenClaw、Cursor、Windsurf……任何能跑命令行的 Agent 都能用 |
-| 🩺 **自带诊断** | `agent-reach doctor` 一条命令告诉你哪个通、哪个不通、怎么修 |
+| ðŸ’° **å®Œå…¨å…è´¹** | æ‰€æœ‰å·¥å…·å¼€æºã€æ‰€æœ‰ API å…è´¹ã€‚å”¯ä¸€å¯èƒ½èŠ±é’±çš„æ˜¯æœåŠ¡å™¨ä»£ç†ï¼ˆ$1/æœˆï¼‰ï¼Œæœ¬åœ°ç”µè„‘ä¸éœ€è¦ |
+| ðŸ”’ **éšç§å®‰å…¨** | Cookie åªå­˜åœ¨ä½ æœ¬åœ°ï¼Œä¸ä¸Šä¼ ä¸å¤–ä¼ ã€‚ä»£ç å®Œå…¨å¼€æºï¼Œéšæ—¶å¯å®¡æŸ¥ |
+| ðŸ”„ **æŒç»­æ¢ä»£** | æ¯ä¸ªå¹³å°éƒ½æ˜¯ã€Œé¦–é€‰ + å¤‡é€‰ã€å¤šåŽç«¯è·¯ç”±ã€‚æŸä¸ªæŽ¥å…¥æ–¹å¼å¤±æ•ˆäº†ï¼Œæˆ‘ä»¬æ¢ä¸‹ä¸€ä¸ªï¼Œä½ æ— æ„Ÿï¼ˆ2026-06 å®žä¾‹ï¼šyt-dlp è¢« Bç«™é£ŽæŽ§å°æ­» â†’ å·²åˆ‡æ¢ bili-cliï¼Œç”¨æˆ·é›¶æ“ä½œï¼‰ |
+| ðŸ¤– **å…¼å®¹æ‰€æœ‰ Agent** | Claude Codeã€OpenClawã€Cursorã€Windsurfâ€¦â€¦ä»»ä½•èƒ½è·‘å‘½ä»¤è¡Œçš„ Agent éƒ½èƒ½ç”¨ |
+| ðŸ©º **è‡ªå¸¦è¯Šæ–­** | `agent-reach doctor` ä¸€æ¡å‘½ä»¤å‘Šè¯‰ä½ å“ªä¸ªé€šã€å“ªä¸ªä¸é€šã€æ€Žä¹ˆä¿® |
 
 ---
 
-## 支持的平台
+## æ”¯æŒçš„å¹³å°
 
-| 平台 | 装好即用 | 配置后解锁 | 怎么配 |
+| å¹³å° | è£…å¥½å³ç”¨ | é…ç½®åŽè§£é” | æ€Žä¹ˆé… |
 |------|---------|-----------|-------|
-| 🌐 **网页** | 阅读任意网页 | — | 无需配置 |
-| 📺 **YouTube** | 字幕提取 + 视频搜索 | — | 无需配置 |
-| 📡 **RSS** | 阅读任意 RSS/Atom 源 | — | 无需配置 |
-| 🔍 **全网搜索** | — | 全网语义搜索 | 自动配置（MCP 接入，免费无需 Key） |
-| 📦 **GitHub** | 读公开仓库 + 搜索 | 私有仓库、提 Issue/PR、Fork | 告诉 Agent「帮我登录 GitHub」 |
-| 🐦 **Twitter/X** | 读单条推文 | 搜索推文、浏览时间线、读长文 | 告诉 Agent「帮我配 Twitter」 |
-| 📺 **B站** | 搜索 + 视频详情（bili-cli，无需登录） | 字幕（OpenCLI） | 告诉 Agent「帮我配 B站」 |
-| 📖 **Reddit** | —（没有零配置路径：匿名接口已被封） | 搜索 + 读帖子和评论 | 桌面装 OpenCLI 用浏览器登录态；或 rdt-cli + Cookie |
-| 📘 **Facebook** | — | 搜索、主页、Feed、群组列表 | 桌面装 OpenCLI（复用 Chrome 登录态） |
-| 📷 **Instagram** | — | 用户搜索、Profile、用户最近帖子、Explore | 桌面装 OpenCLI（复用 Chrome 登录态） |
-| 📕 **小红书** | — | 搜索、阅读、评论 | OpenCLI 只用用户已有 Chrome 会话；MCP/存量工具用 Cookie-Editor |
-| 💼 **LinkedIn** | Jina Reader 读公开页面 | Profile 详情、公司页面、职位搜索 | 告诉 Agent「帮我配 LinkedIn」 |
-| 💻 **V2EX** | 热门帖子、节点帖子、帖子详情+回复、用户信息 | — | 无需配置 |
-| 📈 **雪球** | 股票行情、搜索股票、热门帖子、热门股票排行 | — | 告诉 Agent「帮我配雪球」 |
-| 🎙️ **小宇宙播客** | — | 播客音频转文字（Whisper 转录，免费 Key） | 告诉 Agent「帮我配小宇宙播客」 |
+| ðŸŒ **ç½‘é¡µ** | é˜…è¯»ä»»æ„ç½‘é¡µ | â€” | æ— éœ€é…ç½® |
+| ðŸ“º **YouTube** | å­—å¹•æå– + è§†é¢‘æœç´¢ | â€” | æ— éœ€é…ç½® |
+| ðŸ“¡ **RSS** | é˜…è¯»ä»»æ„ RSS/Atom æº | â€” | æ— éœ€é…ç½® |
+| ðŸ” **å…¨ç½‘æœç´¢** | â€” | å…¨ç½‘è¯­ä¹‰æœç´¢ | è‡ªåŠ¨é…ç½®ï¼ˆMCP æŽ¥å…¥ï¼Œå…è´¹æ— éœ€ Keyï¼‰ |
+| ðŸ“¦ **GitHub** | è¯»å…¬å¼€ä»“åº“ + æœç´¢ | ç§æœ‰ä»“åº“ã€æ Issue/PRã€Fork | å‘Šè¯‰ Agentã€Œå¸®æˆ‘ç™»å½• GitHubã€ |
+| ðŸ¦ **Twitter/X** | è¯»å•æ¡æŽ¨æ–‡ | æœç´¢æŽ¨æ–‡ã€æµè§ˆæ—¶é—´çº¿ã€è¯»é•¿æ–‡ | å‘Šè¯‰ Agentã€Œå¸®æˆ‘é… Twitterã€ |
+| ðŸ“º **Bç«™** | æœç´¢ + è§†é¢‘è¯¦æƒ…ï¼ˆbili-cliï¼Œæ— éœ€ç™»å½•ï¼‰ | å­—å¹•ï¼ˆOpenCLIï¼‰ | å‘Šè¯‰ Agentã€Œå¸®æˆ‘é… Bç«™ã€ |
+| ðŸ“– **Reddit** | â€”ï¼ˆæ²¡æœ‰é›¶é…ç½®è·¯å¾„ï¼šåŒ¿åæŽ¥å£å·²è¢«å°ï¼‰ | æœç´¢ + è¯»å¸–å­å’Œè¯„è®º | æ¡Œé¢è£… OpenCLI ç”¨æµè§ˆå™¨ç™»å½•æ€ï¼›æˆ– rdt-cli + Cookie |
+| ðŸ“˜ **Facebook** | â€” | æœç´¢ã€ä¸»é¡µã€Feedã€ç¾¤ç»„åˆ—è¡¨ | æ¡Œé¢è£… OpenCLIï¼ˆå¤ç”¨ Chrome ç™»å½•æ€ï¼‰ |
+| ðŸ“· **Instagram** | â€” | ç”¨æˆ·æœç´¢ã€Profileã€ç”¨æˆ·æœ€è¿‘å¸–å­ã€Explore | æ¡Œé¢è£… OpenCLIï¼ˆå¤ç”¨ Chrome ç™»å½•æ€ï¼‰ |
+| ðŸ“• **å°çº¢ä¹¦** | â€” | æœç´¢ã€é˜…è¯»ã€è¯„è®º | OpenCLI åªç”¨ç”¨æˆ·å·²æœ‰ Chrome ä¼šè¯ï¼›MCP/å­˜é‡å·¥å…·ç”¨ Cookie-Editor |
+| ðŸ’¼ **LinkedIn** | Jina Reader è¯»å…¬å¼€é¡µé¢ | Profile è¯¦æƒ…ã€å…¬å¸é¡µé¢ã€èŒä½æœç´¢ | å‘Šè¯‰ Agentã€Œå¸®æˆ‘é… LinkedInã€ |
+| ðŸ’» **V2EX** | çƒ­é—¨å¸–å­ã€èŠ‚ç‚¹å¸–å­ã€å¸–å­è¯¦æƒ…+å›žå¤ã€ç”¨æˆ·ä¿¡æ¯ | â€” | æ— éœ€é…ç½® |
+| ðŸ“ˆ **é›ªçƒ** | è‚¡ç¥¨è¡Œæƒ…ã€æœç´¢è‚¡ç¥¨ã€çƒ­é—¨å¸–å­ã€çƒ­é—¨è‚¡ç¥¨æŽ’è¡Œ | â€” | å‘Šè¯‰ Agentã€Œå¸®æˆ‘é…é›ªçƒã€ |
+| ðŸŽ™ï¸ **å°å®‡å®™æ’­å®¢** | â€” | æ’­å®¢éŸ³é¢‘è½¬æ–‡å­—ï¼ˆWhisper è½¬å½•ï¼Œå…è´¹ Keyï¼‰ | å‘Šè¯‰ Agentã€Œå¸®æˆ‘é…å°å®‡å®™æ’­å®¢ã€ |
 
-> **不知道怎么配？不用查文档。** 直接告诉 Agent「帮我配 XXX」，它知道需要什么、会一步一步引导你。
+> **ä¸çŸ¥é“æ€Žä¹ˆé…ï¼Ÿä¸ç”¨æŸ¥æ–‡æ¡£ã€‚** ç›´æŽ¥å‘Šè¯‰ Agentã€Œå¸®æˆ‘é… XXXã€ï¼Œå®ƒçŸ¥é“éœ€è¦ä»€ä¹ˆã€ä¼šä¸€æ­¥ä¸€æ­¥å¼•å¯¼ä½ ã€‚
 >
-> 🍪 Twitter 只接受用户通过 Cookie-Editor 手工导出的内容。Agent Reach 不替用户执行小红书登录，也不读取小红书浏览器 Cookie；OpenCLI 只使用用户已经存在且明确控制的 Chrome 会话。`agent-reach configure xhs-cookies` 不会把 Cookie 注入 OpenCLI / Chrome；没有现成会话时，改用 Cookie-Editor 导出后配置 xiaohongshu-mcp / 存量工具。
+> ðŸª Twitter åªæŽ¥å—ç”¨æˆ·é€šè¿‡ Cookie-Editor æ‰‹å·¥å¯¼å‡ºçš„å†…å®¹ã€‚omnireach-agent ä¸æ›¿ç”¨æˆ·æ‰§è¡Œå°çº¢ä¹¦ç™»å½•ï¼Œä¹Ÿä¸è¯»å–å°çº¢ä¹¦æµè§ˆå™¨ Cookieï¼›OpenCLI åªä½¿ç”¨ç”¨æˆ·å·²ç»å­˜åœ¨ä¸”æ˜Žç¡®æŽ§åˆ¶çš„ Chrome ä¼šè¯ã€‚`agent-reach configure xhs-cookies` ä¸ä¼šæŠŠ Cookie æ³¨å…¥ OpenCLI / Chromeï¼›æ²¡æœ‰çŽ°æˆä¼šè¯æ—¶ï¼Œæ”¹ç”¨ Cookie-Editor å¯¼å‡ºåŽé…ç½® xiaohongshu-mcp / å­˜é‡å·¥å…·ã€‚
 >
-> Twitter Cookie 保存后仅供 `agent-reach doctor` 检查配置是否齐全；直接运行上游 `twitter` 命令前，仍需在当前进程环境中显式设置 `TWITTER_AUTH_TOKEN` 和 `TWITTER_CT0`。
+> Twitter Cookie ä¿å­˜åŽä»…ä¾› `agent-reach doctor` æ£€æŸ¥é…ç½®æ˜¯å¦é½å…¨ï¼›ç›´æŽ¥è¿è¡Œä¸Šæ¸¸ `twitter` å‘½ä»¤å‰ï¼Œä»éœ€åœ¨å½“å‰è¿›ç¨‹çŽ¯å¢ƒä¸­æ˜¾å¼è®¾ç½® `TWITTER_AUTH_TOKEN` å’Œ `TWITTER_CT0`ã€‚
 >
-> 🔒 Cookie 只存在你本地，不上传不外传。代码完全开源，随时可审查。
-> 💻 本地电脑不需要代理。代理只有部署在服务器上才需要（~$1/月）。
+> ðŸ”’ Cookie åªå­˜åœ¨ä½ æœ¬åœ°ï¼Œä¸ä¸Šä¼ ä¸å¤–ä¼ ã€‚ä»£ç å®Œå…¨å¼€æºï¼Œéšæ—¶å¯å®¡æŸ¥ã€‚
+> ðŸ’» æœ¬åœ°ç”µè„‘ä¸éœ€è¦ä»£ç†ã€‚ä»£ç†åªæœ‰éƒ¨ç½²åœ¨æœåŠ¡å™¨ä¸Šæ‰éœ€è¦ï¼ˆ~$1/æœˆï¼‰ã€‚
 
 ---
 
-## 快速上手
+## å¿«é€Ÿä¸Šæ‰‹
 
-> ⚠️ **OpenClaw 用户请先确认 exec 权限已开启**
+> âš ï¸ **OpenClaw ç”¨æˆ·è¯·å…ˆç¡®è®¤ exec æƒé™å·²å¼€å¯**
 >
-> Agent Reach 依赖 Agent 执行 shell 命令（`pip install`、`mcporter`、`twitter` 等）。如果你的 OpenClaw 使用了默认的 `messaging` 工具配置，Agent 将无法执行命令。**安装前请先开启 exec 权限**：
+> omnireach-agent ä¾èµ– Agent æ‰§è¡Œ shell å‘½ä»¤ï¼ˆ`pip install`ã€`mcporter`ã€`twitter` ç­‰ï¼‰ã€‚å¦‚æžœä½ çš„ OpenClaw ä½¿ç”¨äº†é»˜è®¤çš„ `messaging` å·¥å…·é…ç½®ï¼ŒAgent å°†æ— æ³•æ‰§è¡Œå‘½ä»¤ã€‚**å®‰è£…å‰è¯·å…ˆå¼€å¯ exec æƒé™**ï¼š
 >
 > ```bash
 > openclaw config set tools.profile "coding"
 > ```
-> 或在 `~/.openclaw/openclaw.json` 中设置 `"tools": { "profile": "coding" }`。
-> 设置后重启 Gateway（`openclaw gateway restart`）并开启新对话即可。其他平台（Claude Code、Cursor、Windsurf 等）不受此限制。
+> æˆ–åœ¨ `~/.openclaw/openclaw.json` ä¸­è®¾ç½® `"tools": { "profile": "coding" }`ã€‚
+> è®¾ç½®åŽé‡å¯ Gatewayï¼ˆ`openclaw gateway restart`ï¼‰å¹¶å¼€å¯æ–°å¯¹è¯å³å¯ã€‚å…¶ä»–å¹³å°ï¼ˆClaude Codeã€Cursorã€Windsurf ç­‰ï¼‰ä¸å—æ­¤é™åˆ¶ã€‚
 
-复制这句话给你的 AI Agent（Claude Code、OpenClaw、Cursor 等）：
+å¤åˆ¶è¿™å¥è¯ç»™ä½ çš„ AI Agentï¼ˆClaude Codeã€OpenClawã€Cursor ç­‰ï¼‰ï¼š
 
 ```
-帮我安装 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+å¸®æˆ‘å®‰è£… Agent Reachï¼šhttps://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 ```
 
-就这一步。Agent 会自己完成剩下的所有事情。
+å°±è¿™ä¸€æ­¥ã€‚Agent ä¼šè‡ªå·±å®Œæˆå‰©ä¸‹çš„æ‰€æœ‰äº‹æƒ…ã€‚
 
-> 🔄 **已安装过？** 更新也是一句话：
+> ðŸ”„ **å·²å®‰è£…è¿‡ï¼Ÿ** æ›´æ–°ä¹Ÿæ˜¯ä¸€å¥è¯ï¼š
 > ```
-> 帮我更新 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
+> å¸®æˆ‘æ›´æ–° omnireach-agentï¼šhttps://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/update.md
 > ```
 
-> 🛡️ **默认安全：** `agent-reach install` 默认只检查环境，不会自动装系统包或写入配置：
+> ðŸ›¡ï¸ **é»˜è®¤å®‰å…¨ï¼š** `agent-reach install` é»˜è®¤åªæ£€æŸ¥çŽ¯å¢ƒï¼Œä¸ä¼šè‡ªåŠ¨è£…ç³»ç»ŸåŒ…æˆ–å†™å…¥é…ç½®ï¼š
 > ```
-> 帮我安全检查并安装 Agent Reach：https://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
+> å¸®æˆ‘å®‰å…¨æ£€æŸ¥å¹¶å®‰è£… omnireach-agentï¼šhttps://raw.githubusercontent.com/Panniantong/agent-reach/main/docs/install.md
 > ```
-> 只有在你明确允许修改系统后，才使用 `agent-reach install --system`。
+> åªæœ‰åœ¨ä½ æ˜Žç¡®å…è®¸ä¿®æ”¹ç³»ç»ŸåŽï¼Œæ‰ä½¿ç”¨ `agent-reach install --system`ã€‚
 
 <details>
-<summary>它会做什么？（点击展开）</summary>
+<summary>å®ƒä¼šåšä»€ä¹ˆï¼Ÿï¼ˆç‚¹å‡»å±•å¼€ï¼‰</summary>
 
-1. **安装 CLI 工具** — 从本仓库安装 `agent-reach` 命令行（自带 yt-dlp、feedparser；不要从 PyPI 安装同名包，它不是本项目）
-2. **检查系统基建** — 检查 Node.js、gh CLI、mcporter，并给出缺失项的安装方式
-3. **按授权安装与配置** — 仅在显式传入 `--system` 时安装依赖并通过 MCP 接入 Exa
-4. **检测环境** — 判断是本地电脑还是服务器，给出对应的配置建议
-5. **按授权注册 SKILL.md** — 仅在显式 `--system` 时写入 Agent 的 skills 目录；默认检查不改文件
-6. **问你要不要更多** — 默认只激活 6 个零配置渠道；小红书、Twitter、Reddit、Facebook、Instagram 这些需要登录态的，Agent 会列菜单问你要哪些，点名才装
+1. **å®‰è£… CLI å·¥å…·** â€” ä»Žæœ¬ä»“åº“å®‰è£… `agent-reach` å‘½ä»¤è¡Œï¼ˆè‡ªå¸¦ yt-dlpã€feedparserï¼›ä¸è¦ä»Ž PyPI å®‰è£…åŒååŒ…ï¼Œå®ƒä¸æ˜¯æœ¬é¡¹ç›®ï¼‰
+2. **æ£€æŸ¥ç³»ç»ŸåŸºå»º** â€” æ£€æŸ¥ Node.jsã€gh CLIã€mcporterï¼Œå¹¶ç»™å‡ºç¼ºå¤±é¡¹çš„å®‰è£…æ–¹å¼
+3. **æŒ‰æŽˆæƒå®‰è£…ä¸Žé…ç½®** â€” ä»…åœ¨æ˜¾å¼ä¼ å…¥ `--system` æ—¶å®‰è£…ä¾èµ–å¹¶é€šè¿‡ MCP æŽ¥å…¥ Exa
+4. **æ£€æµ‹çŽ¯å¢ƒ** â€” åˆ¤æ–­æ˜¯æœ¬åœ°ç”µè„‘è¿˜æ˜¯æœåŠ¡å™¨ï¼Œç»™å‡ºå¯¹åº”çš„é…ç½®å»ºè®®
+5. **æŒ‰æŽˆæƒæ³¨å†Œ SKILL.md** â€” ä»…åœ¨æ˜¾å¼ `--system` æ—¶å†™å…¥ Agent çš„ skills ç›®å½•ï¼›é»˜è®¤æ£€æŸ¥ä¸æ”¹æ–‡ä»¶
+6. **é—®ä½ è¦ä¸è¦æ›´å¤š** â€” é»˜è®¤åªæ¿€æ´» 6 ä¸ªé›¶é…ç½®æ¸ é“ï¼›å°çº¢ä¹¦ã€Twitterã€Redditã€Facebookã€Instagram è¿™äº›éœ€è¦ç™»å½•æ€çš„ï¼ŒAgent ä¼šåˆ—èœå•é—®ä½ è¦å“ªäº›ï¼Œç‚¹åæ‰è£…
 
-安装完之后，`agent-reach doctor` 一条命令告诉你每个渠道的状态、当前走哪条路。
+å®‰è£…å®Œä¹‹åŽï¼Œ`agent-reach doctor` ä¸€æ¡å‘½ä»¤å‘Šè¯‰ä½ æ¯ä¸ªæ¸ é“çš„çŠ¶æ€ã€å½“å‰èµ°å“ªæ¡è·¯ã€‚
 </details>
 
 ---
 
-## 装好就能用
+## è£…å¥½å°±èƒ½ç”¨
 
-不需要任何配置，告诉 Agent 就行：
+ä¸éœ€è¦ä»»ä½•é…ç½®ï¼Œå‘Šè¯‰ Agent å°±è¡Œï¼š
 
-- "帮我看看这个链接" → `curl https://r.jina.ai/URL` 读任意网页
-- "这个 GitHub 仓库是做什么的" → `gh repo view owner/repo`
-- "这个 YouTube 视频讲了什么" → `yt-dlp` 提取字幕
-- "B站搜一下 AI 教程" → `bili search`（无需登录）
-- "全网搜一下 LLM 框架对比" → Exa 语义搜索
-- "订阅这个 RSS" → `feedparser` 解析
+- "å¸®æˆ‘çœ‹çœ‹è¿™ä¸ªé“¾æŽ¥" â†’ `curl https://r.jina.ai/URL` è¯»ä»»æ„ç½‘é¡µ
+- "è¿™ä¸ª GitHub ä»“åº“æ˜¯åšä»€ä¹ˆçš„" â†’ `gh repo view owner/repo`
+- "è¿™ä¸ª YouTube è§†é¢‘è®²äº†ä»€ä¹ˆ" â†’ `yt-dlp` æå–å­—å¹•
+- "Bç«™æœä¸€ä¸‹ AI æ•™ç¨‹" â†’ `bili search`ï¼ˆæ— éœ€ç™»å½•ï¼‰
+- "å…¨ç½‘æœä¸€ä¸‹ LLM æ¡†æž¶å¯¹æ¯”" â†’ Exa è¯­ä¹‰æœç´¢
+- "è®¢é˜…è¿™ä¸ª RSS" â†’ `feedparser` è§£æž
 
-**不需要记命令。** Agent 读了 SKILL.md 之后自己知道该调什么。需要登录的平台（小红书、Twitter、Reddit、Facebook、Instagram），告诉 Agent「帮我配 XXX」即可解锁。
+**ä¸éœ€è¦è®°å‘½ä»¤ã€‚** Agent è¯»äº† SKILL.md ä¹‹åŽè‡ªå·±çŸ¥é“è¯¥è°ƒä»€ä¹ˆã€‚éœ€è¦ç™»å½•çš„å¹³å°ï¼ˆå°çº¢ä¹¦ã€Twitterã€Redditã€Facebookã€Instagramï¼‰ï¼Œå‘Šè¯‰ Agentã€Œå¸®æˆ‘é… XXXã€å³å¯è§£é”ã€‚
 
 ---
 
-## 设计理念
+## è®¾è®¡ç†å¿µ
 
-**Agent Reach 是一个能力层（capability layer），不是又一个工具。**
+**omnireach-agent æ˜¯ä¸€ä¸ªèƒ½åŠ›å±‚ï¼ˆcapability layerï¼‰ï¼Œä¸æ˜¯åˆä¸€ä¸ªå·¥å…·ã€‚**
 
-它比任何具体实现高一层——负责**选型、安装、体检、路由**，不负责底层读取本身。读取由 Agent 直接调用上游工具完成，没有包装层。
+å®ƒæ¯”ä»»ä½•å…·ä½“å®žçŽ°é«˜ä¸€å±‚â€”â€”è´Ÿè´£**é€‰åž‹ã€å®‰è£…ã€ä½“æ£€ã€è·¯ç”±**ï¼Œä¸è´Ÿè´£åº•å±‚è¯»å–æœ¬èº«ã€‚è¯»å–ç”± Agent ç›´æŽ¥è°ƒç”¨ä¸Šæ¸¸å·¥å…·å®Œæˆï¼Œæ²¡æœ‰åŒ…è£…å±‚ã€‚
 
-你给一个新 Agent 装环境的时候，总要花时间去找工具、装依赖、调配置——Twitter 用什么读？Reddit 怎么登录？小红书的 CLI 停更了换什么？每次都要重新踩一遍。Agent Reach 做的事情很简单：**当下最稳的接入方式，我们替你选好、装好、体检好。接入方式会换代（2026 年 3 月一批单平台 CLI 集体停更，我们换了路由），你不用操心。**
+ä½ ç»™ä¸€ä¸ªæ–° Agent è£…çŽ¯å¢ƒçš„æ—¶å€™ï¼Œæ€»è¦èŠ±æ—¶é—´åŽ»æ‰¾å·¥å…·ã€è£…ä¾èµ–ã€è°ƒé…ç½®â€”â€”Twitter ç”¨ä»€ä¹ˆè¯»ï¼ŸReddit æ€Žä¹ˆç™»å½•ï¼Ÿå°çº¢ä¹¦çš„ CLI åœæ›´äº†æ¢ä»€ä¹ˆï¼Ÿæ¯æ¬¡éƒ½è¦é‡æ–°è¸©ä¸€éã€‚omnireach-agent åšçš„äº‹æƒ…å¾ˆç®€å•ï¼š**å½“ä¸‹æœ€ç¨³çš„æŽ¥å…¥æ–¹å¼ï¼Œæˆ‘ä»¬æ›¿ä½ é€‰å¥½ã€è£…å¥½ã€ä½“æ£€å¥½ã€‚æŽ¥å…¥æ–¹å¼ä¼šæ¢ä»£ï¼ˆ2026 å¹´ 3 æœˆä¸€æ‰¹å•å¹³å° CLI é›†ä½“åœæ›´ï¼Œæˆ‘ä»¬æ¢äº†è·¯ç”±ï¼‰ï¼Œä½ ä¸ç”¨æ“å¿ƒã€‚**
 
-### 🔌 每个平台 = 首选 + 备选的有序后端列表
+### ðŸ”Œ æ¯ä¸ªå¹³å° = é¦–é€‰ + å¤‡é€‰çš„æœ‰åºåŽç«¯åˆ—è¡¨
 
-换接入方式 = 调整列表顺序，不是重写代码。`agent-reach doctor` 会告诉你每个平台**当前在用哪个后端**。
+æ¢æŽ¥å…¥æ–¹å¼ = è°ƒæ•´åˆ—è¡¨é¡ºåºï¼Œä¸æ˜¯é‡å†™ä»£ç ã€‚`agent-reach doctor` ä¼šå‘Šè¯‰ä½ æ¯ä¸ªå¹³å°**å½“å‰åœ¨ç”¨å“ªä¸ªåŽç«¯**ã€‚
 
 ```
 channels/
-├── web.py          → Jina Reader
-├── twitter.py      → twitter-cli ▸ OpenCLI ▸ bird
-├── youtube.py      → yt-dlp
-├── github.py       → gh CLI
-├── bilibili.py     → bili-cli ▸ OpenCLI ▸ 搜索 API（yt-dlp 已被 B站风控封死，退役）
-├── reddit.py       → OpenCLI ▸ rdt-cli（无零配置路径，必须登录态）
-├── facebook.py     → OpenCLI（桌面浏览器登录态）
-├── instagram.py    → OpenCLI（桌面浏览器登录态）
-├── xiaohongshu.py  → OpenCLI ▸ xiaohongshu-mcp ▸ xhs-cli
-├── linkedin.py     → mcp-server-linkedin ▸ Jina Reader
-├── rss.py          → feedparser
-├── exa_search.py   → Exa via mcporter
-└── __init__.py     → 渠道注册（doctor 检测用）
+â”œâ”€â”€ web.py          â†’ Jina Reader
+â”œâ”€â”€ twitter.py      â†’ twitter-cli â–¸ OpenCLI â–¸ bird
+â”œâ”€â”€ youtube.py      â†’ yt-dlp
+â”œâ”€â”€ github.py       â†’ gh CLI
+â”œâ”€â”€ bilibili.py     â†’ bili-cli â–¸ OpenCLI â–¸ æœç´¢ APIï¼ˆyt-dlp å·²è¢« Bç«™é£ŽæŽ§å°æ­»ï¼Œé€€å½¹ï¼‰
+â”œâ”€â”€ reddit.py       â†’ OpenCLI â–¸ rdt-cliï¼ˆæ— é›¶é…ç½®è·¯å¾„ï¼Œå¿…é¡»ç™»å½•æ€ï¼‰
+â”œâ”€â”€ facebook.py     â†’ OpenCLIï¼ˆæ¡Œé¢æµè§ˆå™¨ç™»å½•æ€ï¼‰
+â”œâ”€â”€ instagram.py    â†’ OpenCLIï¼ˆæ¡Œé¢æµè§ˆå™¨ç™»å½•æ€ï¼‰
+â”œâ”€â”€ xiaohongshu.py  â†’ OpenCLI â–¸ xiaohongshu-mcp â–¸ xhs-cli
+â”œâ”€â”€ linkedin.py     â†’ mcp-server-linkedin â–¸ Jina Reader
+â”œâ”€â”€ rss.py          â†’ feedparser
+â”œâ”€â”€ exa_search.py   â†’ Exa via mcporter
+â””â”€â”€ __init__.py     â†’ æ¸ é“æ³¨å†Œï¼ˆdoctor æ£€æµ‹ç”¨ï¼‰
 ```
 
-每个渠道文件按序**真实探测**各候选后端（不只是看命令存不存在），第一个完整可用的当选；坏掉的会给出修复处方。实际的读取和搜索由 Agent 直接调用上游工具完成。
+æ¯ä¸ªæ¸ é“æ–‡ä»¶æŒ‰åº**çœŸå®žæŽ¢æµ‹**å„å€™é€‰åŽç«¯ï¼ˆä¸åªæ˜¯çœ‹å‘½ä»¤å­˜ä¸å­˜åœ¨ï¼‰ï¼Œç¬¬ä¸€ä¸ªå®Œæ•´å¯ç”¨çš„å½“é€‰ï¼›åæŽ‰çš„ä¼šç»™å‡ºä¿®å¤å¤„æ–¹ã€‚å®žé™…çš„è¯»å–å’Œæœç´¢ç”± Agent ç›´æŽ¥è°ƒç”¨ä¸Šæ¸¸å·¥å…·å®Œæˆã€‚
 
-### 当前选型
+### å½“å‰é€‰åž‹
 
-| 场景 | 首选 | 备选 | 为什么这么选 |
+| åœºæ™¯ | é¦–é€‰ | å¤‡é€‰ | ä¸ºä»€ä¹ˆè¿™ä¹ˆé€‰ |
 |------|------|------|-----------|
-| 读网页 | [Jina Reader](https://github.com/jina-ai/reader) | — | 免费，不需要 API Key |
-| 读推特 | [twitter-cli](https://github.com/public-clis/twitter-cli) | [OpenCLI](https://github.com/jackwener/opencli) | 实测搜索稳定；OpenCLI 走浏览器登录态兜底 |
-| Reddit | [OpenCLI](https://github.com/jackwener/opencli)（桌面） | [rdt-cli](https://github.com/public-clis/rdt-cli) | 匿名接口已被封、官方 API 审批制——只剩登录态路线 |
-| Facebook | [OpenCLI](https://github.com/jackwener/opencli)（桌面） | — | Graph API/Groups API 权限收紧；浏览器登录态是当前最实用路径 |
-| Instagram | [OpenCLI](https://github.com/jackwener/opencli)（桌面） | 官方 Graph API（Business/Creator + 审批） | instaloader 类路径不稳定；OpenCLI 复用真实浏览器会话 |
-| YouTube 字幕 + 搜索 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | — | 154K Star，YouTube 仍是最佳（注意：不再用于 B站） |
-| B站 | [bili-cli](https://github.com/public-clis/bilibili-cli) | OpenCLI ▸ 搜索 API | yt-dlp 被 B站风控 412 封死（2026-06 实测），bili-cli 无登录可搜可读 |
-| 搜全网 | [Exa](https://exa.ai) via [mcporter](https://github.com/nicobailon/mcporter) | — | AI 语义搜索，MCP 接入免 Key |
-| GitHub | [gh CLI](https://cli.github.com) | — | 官方工具，认证后完整 API 能力 |
-| 读 RSS | [feedparser](https://github.com/kurtmckee/feedparser) | — | Python 生态标准选择 |
-| 小红书 | [OpenCLI](https://github.com/jackwener/opencli)（桌面） | [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp)（服务器）▸ xhs-cli | OpenCLI 只用用户已有会话；其余后端用 Cookie-Editor 手工导出 |
-| LinkedIn | [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server) | Jina Reader | MCP 服务，浏览器自动化 |
+| è¯»ç½‘é¡µ | [Jina Reader](https://github.com/jina-ai/reader) | â€” | å…è´¹ï¼Œä¸éœ€è¦ API Key |
+| è¯»æŽ¨ç‰¹ | [twitter-cli](https://github.com/public-clis/twitter-cli) | [OpenCLI](https://github.com/jackwener/opencli) | å®žæµ‹æœç´¢ç¨³å®šï¼›OpenCLI èµ°æµè§ˆå™¨ç™»å½•æ€å…œåº• |
+| Reddit | [OpenCLI](https://github.com/jackwener/opencli)ï¼ˆæ¡Œé¢ï¼‰ | [rdt-cli](https://github.com/public-clis/rdt-cli) | åŒ¿åæŽ¥å£å·²è¢«å°ã€å®˜æ–¹ API å®¡æ‰¹åˆ¶â€”â€”åªå‰©ç™»å½•æ€è·¯çº¿ |
+| Facebook | [OpenCLI](https://github.com/jackwener/opencli)ï¼ˆæ¡Œé¢ï¼‰ | â€” | Graph API/Groups API æƒé™æ”¶ç´§ï¼›æµè§ˆå™¨ç™»å½•æ€æ˜¯å½“å‰æœ€å®žç”¨è·¯å¾„ |
+| Instagram | [OpenCLI](https://github.com/jackwener/opencli)ï¼ˆæ¡Œé¢ï¼‰ | å®˜æ–¹ Graph APIï¼ˆBusiness/Creator + å®¡æ‰¹ï¼‰ | instaloader ç±»è·¯å¾„ä¸ç¨³å®šï¼›OpenCLI å¤ç”¨çœŸå®žæµè§ˆå™¨ä¼šè¯ |
+| YouTube å­—å¹• + æœç´¢ | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | â€” | 154K Starï¼ŒYouTube ä»æ˜¯æœ€ä½³ï¼ˆæ³¨æ„ï¼šä¸å†ç”¨äºŽ Bç«™ï¼‰ |
+| Bç«™ | [bili-cli](https://github.com/public-clis/bilibili-cli) | OpenCLI â–¸ æœç´¢ API | yt-dlp è¢« Bç«™é£ŽæŽ§ 412 å°æ­»ï¼ˆ2026-06 å®žæµ‹ï¼‰ï¼Œbili-cli æ— ç™»å½•å¯æœå¯è¯» |
+| æœå…¨ç½‘ | [Exa](https://exa.ai) via [mcporter](https://github.com/nicobailon/mcporter) | â€” | AI è¯­ä¹‰æœç´¢ï¼ŒMCP æŽ¥å…¥å… Key |
+| GitHub | [gh CLI](https://cli.github.com) | â€” | å®˜æ–¹å·¥å…·ï¼Œè®¤è¯åŽå®Œæ•´ API èƒ½åŠ› |
+| è¯» RSS | [feedparser](https://github.com/kurtmckee/feedparser) | â€” | Python ç”Ÿæ€æ ‡å‡†é€‰æ‹© |
+| å°çº¢ä¹¦ | [OpenCLI](https://github.com/jackwener/opencli)ï¼ˆæ¡Œé¢ï¼‰ | [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp)ï¼ˆæœåŠ¡å™¨ï¼‰â–¸ xhs-cli | OpenCLI åªç”¨ç”¨æˆ·å·²æœ‰ä¼šè¯ï¼›å…¶ä½™åŽç«¯ç”¨ Cookie-Editor æ‰‹å·¥å¯¼å‡º |
+| LinkedIn | [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server) | Jina Reader | MCP æœåŠ¡ï¼Œæµè§ˆå™¨è‡ªåŠ¨åŒ– |
 
-> 📌 这些都是「当前选型」，基于真机实测定期复核。某条路失效了我们换下一条——`agent-reach doctor` 永远告诉你现在走的是哪条。
+> ðŸ“Œ è¿™äº›éƒ½æ˜¯ã€Œå½“å‰é€‰åž‹ã€ï¼ŒåŸºäºŽçœŸæœºå®žæµ‹å®šæœŸå¤æ ¸ã€‚æŸæ¡è·¯å¤±æ•ˆäº†æˆ‘ä»¬æ¢ä¸‹ä¸€æ¡â€”â€”`agent-reach doctor` æ°¸è¿œå‘Šè¯‰ä½ çŽ°åœ¨èµ°çš„æ˜¯å“ªæ¡ã€‚
 
 ---
 
-## 安全性
+## å®‰å…¨æ€§
 
-Agent Reach 在设计上重视安全：
+omnireach-agent åœ¨è®¾è®¡ä¸Šé‡è§†å®‰å…¨ï¼š
 
-| 措施 | 说明 |
+| æŽªæ–½ | è¯´æ˜Ž |
 |------|------|
-| 🔒 **凭据本地存储** | Cookie、Token 只存在你本机 `~/.agent-reach/config.yaml`，文件权限 600（仅所有者可读写），不上传不外传 |
-| 🛡️ **默认安全** | `agent-reach install` 默认不修改系统；只有显式 `--system` 才安装外部工具和写入配置 |
-| 👀 **完全开源** | 代码透明，随时可审查。所有依赖工具也是开源项目 |
-| 🔍 **Dry Run** | `agent-reach install --dry-run` 预览所有操作，不做任何改动 |
-| 🧩 **可插拔架构** | 不信任某个组件？换掉对应的 channel 文件即可，不影响其他 |
+| ðŸ”’ **å‡­æ®æœ¬åœ°å­˜å‚¨** | Cookieã€Token åªå­˜åœ¨ä½ æœ¬æœº `~/.agent-reach/config.yaml`ï¼Œæ–‡ä»¶æƒé™ 600ï¼ˆä»…æ‰€æœ‰è€…å¯è¯»å†™ï¼‰ï¼Œä¸ä¸Šä¼ ä¸å¤–ä¼  |
+| ðŸ›¡ï¸ **é»˜è®¤å®‰å…¨** | `agent-reach install` é»˜è®¤ä¸ä¿®æ”¹ç³»ç»Ÿï¼›åªæœ‰æ˜¾å¼ `--system` æ‰å®‰è£…å¤–éƒ¨å·¥å…·å’Œå†™å…¥é…ç½® |
+| ðŸ‘€ **å®Œå…¨å¼€æº** | ä»£ç é€æ˜Žï¼Œéšæ—¶å¯å®¡æŸ¥ã€‚æ‰€æœ‰ä¾èµ–å·¥å…·ä¹Ÿæ˜¯å¼€æºé¡¹ç›® |
+| ðŸ” **Dry Run** | `agent-reach install --dry-run` é¢„è§ˆæ‰€æœ‰æ“ä½œï¼Œä¸åšä»»ä½•æ”¹åŠ¨ |
+| ðŸ§© **å¯æ’æ‹”æž¶æž„** | ä¸ä¿¡ä»»æŸä¸ªç»„ä»¶ï¼Ÿæ¢æŽ‰å¯¹åº”çš„ channel æ–‡ä»¶å³å¯ï¼Œä¸å½±å“å…¶ä»– |
 
-### 🍪 Cookie 安全建议
+### ðŸª Cookie å®‰å…¨å»ºè®®
 
-> ⚠️ **封号风险提醒：** 使用 Cookie 登录的平台（Twitter、小红书等），通过脚本/API 调用**存在被平台检测并封号的风险**。请务必使用**专用小号**，不要用你的主账号。
+> âš ï¸ **å°å·é£Žé™©æé†’ï¼š** ä½¿ç”¨ Cookie ç™»å½•çš„å¹³å°ï¼ˆTwitterã€å°çº¢ä¹¦ç­‰ï¼‰ï¼Œé€šè¿‡è„šæœ¬/API è°ƒç”¨**å­˜åœ¨è¢«å¹³å°æ£€æµ‹å¹¶å°å·çš„é£Žé™©**ã€‚è¯·åŠ¡å¿…ä½¿ç”¨**ä¸“ç”¨å°å·**ï¼Œä¸è¦ç”¨ä½ çš„ä¸»è´¦å·ã€‚
 
-需要 Cookie 或登录态的平台（Twitter、小红书、Reddit、Facebook、Instagram 等）建议使用**专用小号**，不要用主账号。原因有二：
-1. **封号风险** — 平台可能检测到非正常浏览器的 API 调用行为，导致账号被限制或封禁
-2. **安全风险** — Cookie 等同于完整登录权限，用小号可以在凭据泄露时限制影响范围
+éœ€è¦ Cookie æˆ–ç™»å½•æ€çš„å¹³å°ï¼ˆTwitterã€å°çº¢ä¹¦ã€Redditã€Facebookã€Instagram ç­‰ï¼‰å»ºè®®ä½¿ç”¨**ä¸“ç”¨å°å·**ï¼Œä¸è¦ç”¨ä¸»è´¦å·ã€‚åŽŸå› æœ‰äºŒï¼š
+1. **å°å·é£Žé™©** â€” å¹³å°å¯èƒ½æ£€æµ‹åˆ°éžæ­£å¸¸æµè§ˆå™¨çš„ API è°ƒç”¨è¡Œä¸ºï¼Œå¯¼è‡´è´¦å·è¢«é™åˆ¶æˆ–å°ç¦
+2. **å®‰å…¨é£Žé™©** â€” Cookie ç­‰åŒäºŽå®Œæ•´ç™»å½•æƒé™ï¼Œç”¨å°å·å¯ä»¥åœ¨å‡­æ®æ³„éœ²æ—¶é™åˆ¶å½±å“èŒƒå›´
 
-### 📦 安装方式
+### ðŸ“¦ å®‰è£…æ–¹å¼
 
-| 方式 | 命令 | 适合场景 |
+| æ–¹å¼ | å‘½ä»¤ | é€‚åˆåœºæ™¯ |
 |------|------|---------|
-| 默认安全检查 | `agent-reach install --env=auto` | 所有环境；只读检查并列出缺失项 |
-| 显式安装系统依赖 | `agent-reach install --env=auto --system` | 你明确允许修改当前机器时 |
-| 兼容安全参数 | `agent-reach install --env=auto --safe` | 与默认行为相同 |
-| 仅预览 | `agent-reach install --env=auto --dry-run` | 先看看会做什么 |
+| é»˜è®¤å®‰å…¨æ£€æŸ¥ | `agent-reach install --env=auto` | æ‰€æœ‰çŽ¯å¢ƒï¼›åªè¯»æ£€æŸ¥å¹¶åˆ—å‡ºç¼ºå¤±é¡¹ |
+| æ˜¾å¼å®‰è£…ç³»ç»Ÿä¾èµ– | `agent-reach install --env=auto --system` | ä½ æ˜Žç¡®å…è®¸ä¿®æ”¹å½“å‰æœºå™¨æ—¶ |
+| å…¼å®¹å®‰å…¨å‚æ•° | `agent-reach install --env=auto --safe` | ä¸Žé»˜è®¤è¡Œä¸ºç›¸åŒ |
+| ä»…é¢„è§ˆ | `agent-reach install --env=auto --dry-run` | å…ˆçœ‹çœ‹ä¼šåšä»€ä¹ˆ |
 
-### 🗑️ 卸载
+### ðŸ—‘ï¸ å¸è½½
 
 ```bash
 agent-reach uninstall
 ```
 
-会清除：`~/.agent-reach/`（含所有 token/cookie）、各 Agent 的 skill 文件、mcporter 中的 MCP 配置。
+ä¼šæ¸…é™¤ï¼š`~/.agent-reach/`ï¼ˆå«æ‰€æœ‰ token/cookieï¼‰ã€å„ Agent çš„ skill æ–‡ä»¶ã€mcporter ä¸­çš„ MCP é…ç½®ã€‚
 
 ```bash
-# 只预览，不实际删除
+# åªé¢„è§ˆï¼Œä¸å®žé™…åˆ é™¤
 agent-reach uninstall --dry-run
 
-# 只删 skill 文件，保留 token 配置（重装时用）
+# åªåˆ  skill æ–‡ä»¶ï¼Œä¿ç•™ token é…ç½®ï¼ˆé‡è£…æ—¶ç”¨ï¼‰
 agent-reach uninstall --keep-config
 ```
 
-卸载 Python 包本身：`pip uninstall agent-reach`
+å¸è½½ Python åŒ…æœ¬èº«ï¼š`pip uninstall agent-reach`
 
 ---
 
-## ⭐ 为什么值得 Star
+## â­ ä¸ºä»€ä¹ˆå€¼å¾— Star
 
-这个项目我自己每天在用，所以我会一直维护它。
+è¿™ä¸ªé¡¹ç›®æˆ‘è‡ªå·±æ¯å¤©åœ¨ç”¨ï¼Œæ‰€ä»¥æˆ‘ä¼šä¸€ç›´ç»´æŠ¤å®ƒã€‚
 
-- 有新需求或者大家提了想要的渠道，我会陆续加上
-- 每个渠道我会尽量保证**能用、好用、免费**
-- 平台改了反爬或者 API 变了，我会想办法解决
+- æœ‰æ–°éœ€æ±‚æˆ–è€…å¤§å®¶æäº†æƒ³è¦çš„æ¸ é“ï¼Œæˆ‘ä¼šé™†ç»­åŠ ä¸Š
+- æ¯ä¸ªæ¸ é“æˆ‘ä¼šå°½é‡ä¿è¯**èƒ½ç”¨ã€å¥½ç”¨ã€å…è´¹**
+- å¹³å°æ”¹äº†åçˆ¬æˆ–è€… API å˜äº†ï¼Œæˆ‘ä¼šæƒ³åŠžæ³•è§£å†³
 
-为 Web 4.0 基建贡献一份自己的力量。
+ä¸º Web 4.0 åŸºå»ºè´¡çŒ®ä¸€ä»½è‡ªå·±çš„åŠ›é‡ã€‚
 
-Star 一下，下次需要的时候能找到。⭐
+Star ä¸€ä¸‹ï¼Œä¸‹æ¬¡éœ€è¦çš„æ—¶å€™èƒ½æ‰¾åˆ°ã€‚â­
 
 ---
 
-## 致谢
+## è‡´è°¢
 
-[OpenCLI](https://github.com/jackwener/opencli) · [twitter-cli](https://github.com/public-clis/twitter-cli) · [rdt-cli](https://github.com/public-clis/rdt-cli) · [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) · [xhs-cli](https://github.com/jackwener/xiaohongshu-cli) · [bili-cli](https://github.com/public-clis/bilibili-cli) · [yt-dlp](https://github.com/yt-dlp/yt-dlp) · [Jina Reader](https://github.com/jina-ai/reader) · [Exa](https://exa.ai) · [mcporter](https://github.com/nicobailon/mcporter) · [feedparser](https://github.com/kurtmckee/feedparser) · [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server)
+[OpenCLI](https://github.com/jackwener/opencli) Â· [twitter-cli](https://github.com/public-clis/twitter-cli) Â· [rdt-cli](https://github.com/public-clis/rdt-cli) Â· [xiaohongshu-mcp](https://github.com/xpzouying/xiaohongshu-mcp) Â· [xhs-cli](https://github.com/jackwener/xiaohongshu-cli) Â· [bili-cli](https://github.com/public-clis/bilibili-cli) Â· [yt-dlp](https://github.com/yt-dlp/yt-dlp) Â· [Jina Reader](https://github.com/jina-ai/reader) Â· [Exa](https://exa.ai) Â· [mcporter](https://github.com/nicobailon/mcporter) Â· [feedparser](https://github.com/kurtmckee/feedparser) Â· [mcp-server-linkedin](https://github.com/stickerdaniel/linkedin-mcp-server)
 
-## 联系
+## è”ç³»
 
-- 📧 **Email:** pnt01@foxmail.com
-- 🐦 **Twitter/X:** [@Neo_Reidlab](https://x.com/Neo_Reidlab)
+- ðŸ“§ **Email:** pnt01@foxmail.com
+- ðŸ¦ **Twitter/X:** [@Neo_Reidlab](https://x.com/Neo_Reidlab)
 
-## 业务合作 / Agent 落地
+## ä¸šåŠ¡åˆä½œ / Agent è½åœ°
 
-我正在承接 Agent 相关的定制与落地合作。
+æˆ‘æ­£åœ¨æ‰¿æŽ¥ Agent ç›¸å…³çš„å®šåˆ¶ä¸Žè½åœ°åˆä½œã€‚
 
-如果你在企业生产、运营、市场、投研、数据处理、内容处理或其他业务流程里，有希望用 Agent 自动化的环节，欢迎加我微信交流。
+å¦‚æžœä½ åœ¨ä¼ä¸šç”Ÿäº§ã€è¿è¥ã€å¸‚åœºã€æŠ•ç ”ã€æ•°æ®å¤„ç†ã€å†…å®¹å¤„ç†æˆ–å…¶ä»–ä¸šåŠ¡æµç¨‹é‡Œï¼Œæœ‰å¸Œæœ›ç”¨ Agent è‡ªåŠ¨åŒ–çš„çŽ¯èŠ‚ï¼Œæ¬¢è¿ŽåŠ æˆ‘å¾®ä¿¡äº¤æµã€‚
 
-不需要你已经想清楚方案。只要你有真实流程、真实问题或真实需求，我可以一起判断 Agent 能不能解决、怎么做。
+ä¸éœ€è¦ä½ å·²ç»æƒ³æ¸…æ¥šæ–¹æ¡ˆã€‚åªè¦ä½ æœ‰çœŸå®žæµç¨‹ã€çœŸå®žé—®é¢˜æˆ–çœŸå®žéœ€æ±‚ï¼Œæˆ‘å¯ä»¥ä¸€èµ·åˆ¤æ–­ Agent èƒ½ä¸èƒ½è§£å†³ã€æ€Žä¹ˆåšã€‚
 
-加好友请备注：`业务 + 你想让 Agent 帮你做什么`
+åŠ å¥½å‹è¯·å¤‡æ³¨ï¼š`ä¸šåŠ¡ + ä½ æƒ³è®© Agent å¸®ä½ åšä»€ä¹ˆ`
 
-Builder 也欢迎备注：`Builder + 你在做什么`
+Builder ä¹Ÿæ¬¢è¿Žå¤‡æ³¨ï¼š`Builder + ä½ åœ¨åšä»€ä¹ˆ`
 
-只是想进交流群，备注：`加群`
+åªæ˜¯æƒ³è¿›äº¤æµç¾¤ï¼Œå¤‡æ³¨ï¼š`åŠ ç¾¤`
 
 <p align="center">
   <img src="docs/wechat-group-qr.jpg" width="280" alt="WeChat QR">
 </p>
 
-> Bug 反馈和功能请求请用 [GitHub Issues](https://github.com/Panniantong/Agent-Reach/issues)，更容易跟踪。
+> Bug åé¦ˆå’ŒåŠŸèƒ½è¯·æ±‚è¯·ç”¨ [GitHub Issues](https://github.com/Panniantong/Agent-Reach/issues)ï¼Œæ›´å®¹æ˜“è·Ÿè¸ªã€‚
 
 ## License
 
 [MIT](LICENSE)
 
-## 友情链接
+## å‹æƒ…é“¾æŽ¥
 
-[Agent Skills Hub](https://agentskillshub.top/) — 找 Claude 技能和 MCP 服务器，不用猜哪个安全：133,000+ 个条目全部安全分级、质量评分，每 8 小时刷新。
+[Agent Skills Hub](https://agentskillshub.top/) â€” æ‰¾ Claude æŠ€èƒ½å’Œ MCP æœåŠ¡å™¨ï¼Œä¸ç”¨çŒœå“ªä¸ªå®‰å…¨ï¼š133,000+ ä¸ªæ¡ç›®å…¨éƒ¨å®‰å…¨åˆ†çº§ã€è´¨é‡è¯„åˆ†ï¼Œæ¯ 8 å°æ—¶åˆ·æ–°ã€‚
 
-[AtomGit 镜像](https://atomgit.com/qq_51337814/Agent-Reach) — Agent Reach 的 AtomGit 同步镜像，便于国内访问与克隆。
+[AtomGit é•œåƒ](https://atomgit.com/qq_51337814/Agent-Reach) â€” omnireach-agent çš„ AtomGit åŒæ­¥é•œåƒï¼Œä¾¿äºŽå›½å†…è®¿é—®ä¸Žå…‹éš†ã€‚
 
 ## Star History
 
