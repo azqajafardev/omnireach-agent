@@ -64,9 +64,9 @@ def test_install_xiaoyuzhou_deps_replaces_stale_managed_script(
     assert "script updated" in capsys.readouterr().out
 
 
-def test_transcribe_script_is_cross_platform_shell_syntax():
+def test_transcribe_script_is_cross_platform_shell_syntax(bash_executable):
     subprocess.run(
-        ["bash", "-n", TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix()],
+        [bash_executable, "-n", TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix()],
         check=True,
         cwd=ROOT,
     )
@@ -86,6 +86,14 @@ def _write_executable(path: Path, content: str) -> None:
     path.chmod(0o755)
 
 
+def _bash_path(path: Path) -> str:
+    """Render a native path for a Bash process, including Git Bash on Windows."""
+    rendered = path.resolve().as_posix()
+    if os.name == "nt" and len(rendered) >= 3 and rendered[1:3] == ":/":
+        return f"/{rendered[0].lower()}{rendered[2:]}"
+    return rendered
+
+
 def _script_env(tmp_path: Path, curl_script: str) -> tuple[dict[str, str], Path, Path]:
     fake_bin = tmp_path / "bin"
     fake_bin.mkdir()
@@ -96,10 +104,10 @@ def _script_env(tmp_path: Path, curl_script: str) -> tuple[dict[str, str], Path,
 
     env = os.environ.copy()
     env.update({
-        "CURL_LOG": str(curl_log),
+        "CURL_LOG": _bash_path(curl_log),
         "GROQ_API_KEY": "test-key",
         "PATH": f"{fake_bin}{os.pathsep}{env['PATH']}",
-        "TMPDIR": str(temp_root),
+        "TMPDIR": _bash_path(temp_root),
     })
     return env, curl_log, temp_root
 
@@ -117,17 +125,25 @@ def _assert_work_dir_cleaned(temp_root: Path) -> None:
         "https://evil.example/episode/123?next=xiaoyuzhoufm.com",
     ],
 )
-def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(tmp_path, url):
+def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(
+    tmp_path, url, bash_executable
+):
     env, curl_log, temp_root = _script_env(
         tmp_path,
         "#!/bin/sh\nprintf 'called\\n' >> \"$CURL_LOG\"\nexit 42\n",
     )
 
     result = subprocess.run(
-        ["bash", str(TRANSCRIBE_SCRIPT), url, str(tmp_path / "out.txt")],
+        [
+            bash_executable,
+            TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix(),
+            url,
+            _bash_path(tmp_path / "out.txt"),
+        ],
         capture_output=True,
         text=True,
         env=env,
+        cwd=ROOT,
     )
 
     assert result.returncode != 0
@@ -143,17 +159,25 @@ def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(tmp_path, url
         "https://www.xiaoyuzhoufm.com/episode/123",
     ],
 )
-def test_transcribe_script_accepts_http_xiaoyuzhou_hosts(tmp_path, url):
+def test_transcribe_script_accepts_http_xiaoyuzhou_hosts(
+    tmp_path, url, bash_executable
+):
     env, curl_log, temp_root = _script_env(
         tmp_path,
         "#!/bin/sh\nprintf '%s\\n' \"$*\" >> \"$CURL_LOG\"\nexit 42\n",
     )
 
     result = subprocess.run(
-        ["bash", str(TRANSCRIBE_SCRIPT), url, str(tmp_path / "out.txt")],
+        [
+            bash_executable,
+            TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix(),
+            url,
+            _bash_path(tmp_path / "out.txt"),
+        ],
         capture_output=True,
         text=True,
         env=env,
+        cwd=ROOT,
     )
 
     assert result.returncode != 0
@@ -190,7 +214,9 @@ def test_transcribe_script_uses_secure_temp_and_bounded_curl_calls():
 
 
 @pytest.mark.parametrize("ffprobe_output", ["", "not-a-number"])
-def test_transcribe_script_fails_clearly_for_invalid_duration(tmp_path, ffprobe_output):
+def test_transcribe_script_fails_clearly_for_invalid_duration(
+    tmp_path, ffprobe_output, bash_executable
+):
     env, _, temp_root = _script_env(
         tmp_path,
         """#!/bin/bash
@@ -218,14 +244,15 @@ fi
 
     result = subprocess.run(
         [
-            "bash",
-            str(TRANSCRIBE_SCRIPT),
+            bash_executable,
+            TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix(),
             "https://www.xiaoyuzhoufm.com/episode/123",
-            str(tmp_path / "out.txt"),
+            _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
         text=True,
         env=env,
+        cwd=ROOT,
     )
 
     assert result.returncode != 0
@@ -235,7 +262,7 @@ fi
 
 @pytest.mark.parametrize("ffprobe_output", ["10801", "9" * 500])
 def test_transcribe_script_rejects_overlong_audio_before_ffmpeg_or_groq(
-    tmp_path, ffprobe_output
+    tmp_path, ffprobe_output, bash_executable
 ):
     env, curl_log, temp_root = _script_env(
         tmp_path,
@@ -266,19 +293,20 @@ fi
         tmp_path / "bin" / "ffmpeg",
         "#!/bin/sh\nprintf 'called' > \"$FFMPEG_MARKER\"\n",
     )
-    env["FFMPEG_MARKER"] = str(ffmpeg_marker)
+    env["FFMPEG_MARKER"] = _bash_path(ffmpeg_marker)
     env["FFPROBE_OUTPUT"] = ffprobe_output
 
     result = subprocess.run(
         [
-            "bash",
-            str(TRANSCRIBE_SCRIPT),
+            bash_executable,
+            TRANSCRIBE_SCRIPT.relative_to(ROOT).as_posix(),
             "https://www.xiaoyuzhoufm.com/episode/123",
-            str(tmp_path / "out.txt"),
+            _bash_path(tmp_path / "out.txt"),
         ],
         capture_output=True,
         text=True,
         env=env,
+        cwd=ROOT,
     )
 
     assert result.returncode != 0
