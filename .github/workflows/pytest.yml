@@ -48,6 +48,7 @@ jobs:
       - name: Run tests
         shell: bash
         run: |
+          export PATH="/c/Program Files/Git/bin:/c/Program Files/Git/usr/bin:$PATH"
           pytest -q
 
   # Editable installs (-e) never exercise wheel packaging, so a broken wheel
