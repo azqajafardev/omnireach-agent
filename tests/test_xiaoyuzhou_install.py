@@ -81,11 +81,6 @@ def test_transcribe_script_handles_git_bash_python_and_size_math():
     assert "| bc" not in text
 
 
-def _write_executable(path: Path, content: str) -> None:
-    path.write_text(content, encoding="utf-8")
-    path.chmod(0o755)
-
-
 def _bash_path(path: Path) -> str:
     """Render a native path for a Bash process, including Git Bash on Windows."""
     rendered = path.resolve().as_posix()
@@ -94,22 +89,32 @@ def _bash_path(path: Path) -> str:
     return rendered
 
 
-def _script_env(tmp_path: Path, curl_script: str) -> tuple[dict[str, str], Path, Path]:
-    fake_bin = tmp_path / "bin"
-    fake_bin.mkdir()
+def _append_bash_function(path: Path, name: str, script: str) -> None:
+    lines = script.splitlines()
+    if lines and lines[0].startswith("#!"):
+        lines = lines[1:]
+    body = "\n".join(lines)
+    with path.open("a", encoding="utf-8") as handle:
+        handle.write(f"{name}() {{\n{body}\n}}\n")
+
+
+def _script_env(
+    tmp_path: Path, curl_script: str
+) -> tuple[dict[str, str], Path, Path, Path]:
     curl_log = tmp_path / "curl.log"
     temp_root = tmp_path / "tmp"
     temp_root.mkdir()
-    _write_executable(fake_bin / "curl", curl_script)
+    bash_env = tmp_path / "bash-env.sh"
+    _append_bash_function(bash_env, "curl", curl_script)
 
     env = os.environ.copy()
     env.update({
+        "BASH_ENV": _bash_path(bash_env),
         "CURL_LOG": _bash_path(curl_log),
         "GROQ_API_KEY": "test-key",
-        "PATH": f"{fake_bin}{os.pathsep}{env['PATH']}",
         "TMPDIR": _bash_path(temp_root),
     })
-    return env, curl_log, temp_root
+    return env, curl_log, temp_root, bash_env
 
 
 def _assert_work_dir_cleaned(temp_root: Path) -> None:
@@ -128,7 +133,7 @@ def _assert_work_dir_cleaned(temp_root: Path) -> None:
 def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(
     tmp_path, url, bash_executable
 ):
-    env, curl_log, temp_root = _script_env(
+    env, curl_log, temp_root, _ = _script_env(
         tmp_path,
         "#!/bin/sh\nprintf 'called\\n' >> \"$CURL_LOG\"\nexit 42\n",
     )
@@ -163,7 +168,7 @@ def test_transcribe_script_rejects_non_xiaoyuzhou_urls_before_curl(
 def test_transcribe_script_accepts_http_xiaoyuzhou_hosts(
     tmp_path, url, bash_executable
 ):
-    env, curl_log, temp_root = _script_env(
+    env, curl_log, temp_root, _ = _script_env(
         tmp_path,
         "#!/bin/sh\nprintf '%s\\n' \"$*\" >> \"$CURL_LOG\"\nexit 42\n",
     )
@@ -219,7 +224,7 @@ def test_transcribe_script_uses_secure_temp_and_bounded_curl_calls():
 def test_transcribe_script_fails_clearly_for_invalid_duration(
     tmp_path, ffprobe_output, bash_executable
 ):
-    env, _, temp_root = _script_env(
+    env, _, temp_root, bash_env = _script_env(
         tmp_path,
         """#!/bin/bash
 output=""
@@ -238,8 +243,9 @@ else
 fi
 """,
     )
-    _write_executable(
-        tmp_path / "bin" / "ffprobe",
+    _append_bash_function(
+        bash_env,
+        "ffprobe",
         "#!/bin/sh\nprintf '%s' \"$FFPROBE_OUTPUT\"\n",
     )
     env["FFPROBE_OUTPUT"] = ffprobe_output
@@ -267,7 +273,7 @@ fi
 def test_transcribe_script_rejects_overlong_audio_before_ffmpeg_or_groq(
     tmp_path, ffprobe_output, bash_executable
 ):
-    env, curl_log, temp_root = _script_env(
+    env, curl_log, temp_root, bash_env = _script_env(
         tmp_path,
         """#!/bin/bash
 printf '%s\n' "$*" >> "$CURL_LOG"
@@ -288,12 +294,14 @@ fi
 """,
     )
     ffmpeg_marker = tmp_path / "ffmpeg-called"
-    _write_executable(
-        tmp_path / "bin" / "ffprobe",
+    _append_bash_function(
+        bash_env,
+        "ffprobe",
         "#!/bin/sh\nprintf '%s' \"$FFPROBE_OUTPUT\"\n",
     )
-    _write_executable(
-        tmp_path / "bin" / "ffmpeg",
+    _append_bash_function(
+        bash_env,
+        "ffmpeg",
         "#!/bin/sh\nprintf 'called' > \"$FFMPEG_MARKER\"\n",
     )
     env["FFMPEG_MARKER"] = _bash_path(ffmpeg_marker)
